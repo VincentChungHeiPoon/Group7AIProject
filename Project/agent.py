@@ -5,7 +5,7 @@ class Agent:
         self.y = startingY
         self.havePackage = havePackage
 
-        #move up if there is space above you
+    #set of move opeorator
     def moveUp(self, mapUpperLimiteIndex):
         if(self.y + 1 <= mapUpperLimiteIndex):
             self.y += 1
@@ -30,9 +30,6 @@ class Agent:
         else:
             print("(right) is not a valid move")
 
-    def isCarryingPackage(self):
-        return self.havePackage
-
     def pickUpPackage(self):
         if not (self.havePackage):
             self.havePackage = True
@@ -44,3 +41,34 @@ class Agent:
             self.havePackage = False
         else:
             print("(drop off package) is not a valid move")
+
+    #set of check can apply opeorator
+    def canMoveUp(self, mapUpperLimiteIndex) -> bool:
+        if(self.y + 1 <= mapUpperLimiteIndex):
+            return True
+        else:
+            return False
+
+    def canMoveDown(self, mapLowerLimitIndex) -> bool:
+        if(self.y - 1 >= mapLowerLimitIndex):
+            return True
+        else:
+            return False
+
+    def canMoveLeft(self, mapLeftLimiteIndex):
+        if(self.x - 1 >= mapLeftLimiteIndex):
+            return True
+        else:
+            return False
+
+    def canMoveRight(self, mapRightLimitIndex):
+        if(self.x + 1 <= mapRightLimitIndex):
+            return True
+        else:
+            return False
+
+    def canPickUp(self):
+        return not (self.havePackage)
+
+    def canDropOff(self):
+        return self.havePackage
