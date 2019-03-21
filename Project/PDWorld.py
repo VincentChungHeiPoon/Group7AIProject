@@ -34,7 +34,25 @@ class Node:
             return False
 
 class World:
+    # this initialize the map for the class
     def __init__(self):
         cols = 5
         rows = 5
-        self.map = [[Node() for j in range(cols) for i in range(rows)]]
+        self.map = [[Node() for j in range(cols)] for i in range(rows)]
+        self.setPickUp(0,0)
+        self.setPickUp(2,2)
+        self.setPickUp(4,4)
+
+        self.setDropOff(1,4)
+        self.setDropOff(4,0)
+        self.setDropOff(4,2)
+    #set block as pickUpBlock
+    def setPickUp(self, x, y):
+        self.map[x][y].isPickUp = True
+        self.map[x][y].blockCount = 5
+    #set block as dropOffBlock
+    def setDropOff(self, x, y):
+        self.map[x][y].isDropOff = True
+
+w = World()
+print(w.map[0][0].blockCount)
