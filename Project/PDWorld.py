@@ -2,12 +2,15 @@
 
 class Node:
     #x, y is position, isPickUp/DropOff refer to is a pick or drop off location, block count is how many block is in the node
-    def __init__(self, x, y, isPickUp, isDropOff, blockCount):
-        self.x = x
-        self.y = y
-        self.isPickUp = isPickUp
-        self.isDropOff = isDropOff
-        self.blockCount = blockCount
+    #update them if they are assigned to be a pick up or drop off
+    def __init__(self):
+        self.isPickUp = False
+        self.isDropOff = False
+        self.blockCount = 0
+        self.qUp = 0
+        self.qDown = 0
+        self.qLeft = 0
+        self.qRight = 0
 
     def pickUpAblock(self):
         if(self.isPickUp and self.blockCount > 0):
@@ -30,4 +33,8 @@ class Node:
         else:
             return False
 
-
+class World:
+    def __init__(self):
+        cols = 5
+        rows = 5
+        self.map = [[Node() for j in range(cols) for i in range(rows)]]

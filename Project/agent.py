@@ -4,6 +4,7 @@ class Agent:
         self.x = startingX
         self.y = startingY
         self.havePackage = havePackage
+        self.score = 0
 
     #set of move opeorator
     def moveUp(self, mapUpperLimiteIndex):
