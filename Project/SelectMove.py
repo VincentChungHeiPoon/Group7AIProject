@@ -10,9 +10,9 @@ class SelectMove:
 #roll untill a random valid move 0,1,2,3 corrispond to north, east, south, west
 
 #select at complete random
-    def PRANDOM(agent, world):
+    def PRANDOM(agent, world, printMove):
         if(SelectMove.canPickUpAndDropOff(agent, world)):
-            SelectMove.pickUpAndDropOff(agent, world)
+            SelectMove.pickUpAndDropOff(agent, world, printMove)
         else:
             legalMove = False
             while not (legalMove):
@@ -20,66 +20,89 @@ class SelectMove:
                 if(move == 0 and agent.canMoveNorth(0)):
                     agent.moveNorth(0)
                     legalMove = True
-                    print("Agent moved North")
+                    if(printMove):
+                        print("Agent moved North")
                 elif(move == 1 and agent.canMoveEast(4)):
                     agent.moveEast(4)
                     legalMove = True
-                    print("Agent moved East")
+                    if (printMove):
+                        print("Agent moved East")
                 elif (move == 2 and agent.canMoveSouth(4)):
                     agent.moveSouth(4)
                     legalMove = True
-                    print("Agent moved South")
+                    if (printMove):
+                        print("Agent moved South")
                 elif (move == 3 and agent.canMoveWest(0)):
                     agent.moveWest(0)
                     legalMove = True
-                    print("Agent moved West")
+                    if (printMove):
+                        print("Agent moved West")
 
             agent.score -= 1
 
 #select best move at 80%, random at 20%
-    def PEPLOIT(agent, world):
+    def PEPLOIT(agent, world, printMove):
         if (SelectMove.canPickUpAndDropOff(agent, world)):
-            SelectMove.pickUpAndDropOff(agent, world)
+            SelectMove.pickUpAndDropOff(agent, world, printMove)
         else:
             rand = random.randint(1,10)
             #at 20% change, select randomly
             if(rand <= 2):
-                SelectMove.PRANDOM(agent, world)
+                SelectMove.PRANDOM(agent, world, printMove)
             #at 80% select the best q value
             elif(rand > 2 and rand <= 10):
                 move = SelectMove.findBestQValue(agent, world.map[agent.x][agent.y])
                 if (move == 0 and agent.canMoveNorth(0)):
                     agent.moveNorth(0)
-                    print("Agent moved North")
+                    legalMove = True
+                    if (printMove):
+                        print("Agent moved North")
                 elif (move == 1 and agent.canMoveEast(4)):
                     agent.moveEast(4)
-                    print("Agent moved East")
+                    legalMove = True
+                    if (printMove):
+                        print("Agent moved East")
                 elif (move == 2 and agent.canMoveSouth(4)):
                     agent.moveSouth(4)
-                    print("Agent moved South")
+                    legalMove = True
+                    if (printMove):
+                        print("Agent moved South")
                 elif (move == 3 and agent.canMoveWest(0)):
                     agent.moveWest(0)
-                    print("Agent moved West")
+                    legalMove = True
+                    if (printMove):
+                        print("Agent moved West")
+                agent.score -= 1
 
 
 
-    def PGREEDY(agent, world):
+    def PGREEDY(agent, world, printMove):
         if (SelectMove.canPickUpAndDropOff(agent, world)):
-            SelectMove.pickUpAndDropOff(agent, world)
+            SelectMove.pickUpAndDropOff(agent, world, printMove)
         else:
             move = SelectMove.findBestQValue(agent, world.map[agent.x][agent.y])
             if (move == 0 and agent.canMoveNorth(0)):
                 agent.moveNorth(0)
-                print("Agent moved North")
+                legalMove = True
+                if (printMove):
+                    print("Agent moved North")
             elif (move == 1 and agent.canMoveEast(4)):
                 agent.moveEast(4)
-                print("Agent moved East")
+                legalMove = True
+                if (printMove):
+                    print("Agent moved East")
             elif (move == 2 and agent.canMoveSouth(4)):
                 agent.moveSouth(4)
-                print("Agent moved South")
+                legalMove = True
+                if (printMove):
+                    print("Agent moved South")
             elif (move == 3 and agent.canMoveWest(0)):
                 agent.moveWest(0)
-                print("Agent moved West")
+                legalMove = True
+                if (printMove):
+                    print("Agent moved West")
+
+            agent.score -= 1
 
 
 
@@ -126,17 +149,19 @@ class SelectMove:
             return list[random.randint(0, (len(list) - 1))]
 
 #this method will pickup/dropoff if applicable
-    def pickUpAndDropOff(agent, world):
+    def pickUpAndDropOff(agent, world, printMove):
         if (world.map[agent.x][agent.y].isPickUp and world.map[agent.x][agent.y].canPickUpBlock and agent.canPickUp()):
             world.map[agent.x][agent.y].pickUpAblock()
             agent.pickUpPackage()
             agent.score += 13
-            print("Agent Picked Up Block")
+            if (printMove):
+                print("Agent Picked Up Block")
         elif (world.map[agent.x][agent.y].isDropOff and world.map[agent.x][agent.y].canDropOffBlock and agent.canDropOff()):
             world.map[agent.x][agent.y].dropOffBlock()
             agent.dropOffPackage()
             agent.score += 13
-            print("Agent Dropped Off Block")
+            if (printMove):
+                print("Agent Dropped Off Block")
 
 
 
