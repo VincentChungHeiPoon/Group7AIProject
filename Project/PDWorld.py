@@ -54,5 +54,5 @@ class World:
     def setDropOff(self, x, y):
         self.map[x][y].isDropOff = True
 
-w = World()
-print(w.map[0][0].blockCount)
+#w = World()
+# print(w.map[0][0].blockCount)
