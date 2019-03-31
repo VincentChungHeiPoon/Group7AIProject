@@ -12,30 +12,10 @@ world = World()
 
 #update score after every move
 
-n = Node()
 
-n.qNorth = 1
-n.qSouth = 1
-n.qEast = 1
-print(SelectMove.findBestQValue(agent, n))
-print(SelectMove.findBestQValue(agent, n))
-print(SelectMove.findBestQValue(agent, n))
-print(SelectMove.findBestQValue(agent, n))
-print(SelectMove.findBestQValue(agent, n))
-print(SelectMove.findBestQValue(agent, n))
+# SelectMove.PEPLOIT(agent, world)
+#SelectMove.PRANDOM(agent, world)
 
 
 
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-# SelectMove.PRANDOM(agent, world)
-
-# value = [ 2, 3, 1, 4 ]
-# value.sort(reverse= True)
-# print(value)
+# print("Agent is at x: ", agent.x, " y: ", agent.y)

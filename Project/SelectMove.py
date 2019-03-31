@@ -11,16 +11,8 @@ class SelectMove:
 
 #select at complete random
     def PRANDOM(agent, world):
-        if(world.map[agent.x][agent.y].isPickUp and world.map[agent.x][agent.y].canPickUpBlock and agent.canPickUp()):
-            world.map[agent.x][agent.y].pickUpAblock()
-            agent.pickUpPackage()
-            agent.score += 13
-            print("Agent Picked Up Block")
-        elif(world.map[agent.x][agent.y].isDropOff and world.map[agent.x][agent.y].canDropOffBlock and agent.canDropOff()):
-            world.map[agent.x][agent.y].dropOffBlock()
-            agent.dropOffPackage()
-            agent.score += 13
-            print("Agent Dropped Off Block")
+        if(SelectMove.canPickUpAndDropOff(agent, world)):
+            SelectMove.pickUpAndDropOff(agent, world)
         else:
             legalMove = False
             while not (legalMove):
@@ -43,16 +35,31 @@ class SelectMove:
                     print("Agent moved West")
 
             agent.score -= 1
-            print("Agent is at x: ", agent.x, " y: ", agent.y)
 
 #select best move at 80%, random at 20%
-    # def PEPLOIT(agent, world):
-    #     rand = random.randint(1,10)
-    #     #at 20% change, select randomly
-    #     if(rand <= 2):
-    #         SelectMove.PRANDOM(agent, world)
-    #     #at 80% select the best q value
-    #     elif(random > 2 and rand <= 10):
+    def PEPLOIT(agent, world):
+        if (SelectMove.canPickUpAndDropOff(agent, world)):
+            SelectMove.pickUpAndDropOff(agent, world)
+        else:
+            rand = random.randint(1,10)
+            #at 20% change, select randomly
+            if(rand <= 2):
+                SelectMove.PRANDOM(agent, world)
+            #at 80% select the best q value
+            elif(rand > 2 and rand <= 10):
+                move = SelectMove.findBestQValue(agent, world.map[agent.x][agent.y])
+                if (move == 0 and agent.canMoveNorth(0)):
+                    agent.moveNorth(0)
+                    print("Agent moved North")
+                elif (move == 1 and agent.canMoveEast(4)):
+                    agent.moveEast(4)
+                    print("Agent moved East")
+                elif (move == 2 and agent.canMoveSouth(4)):
+                    agent.moveSouth(4)
+                    print("Agent moved South")
+                elif (move == 3 and agent.canMoveWest(0)):
+                    agent.moveWest(0)
+                    print("Agent moved West")
 
 
 
@@ -75,7 +82,6 @@ class SelectMove:
             value.append(node.qWest)
 
         value.sort(reverse=True)
-        print(value)
         #if frist 2 value is not the same, there is no tie
         if not (value[0] == value[1]):
             if(node.qNorth == value[0] and agent.canMoveNorth(0)):
@@ -100,4 +106,21 @@ class SelectMove:
                 list.append(3)
             return list[random.randint(0, (len(list) - 1))]
 
+#this method will pickup/dropoff if applicable
+    def pickUpAndDropOff(agent, world):
+        if (world.map[agent.x][agent.y].isPickUp and world.map[agent.x][agent.y].canPickUpBlock and agent.canPickUp()):
+            world.map[agent.x][agent.y].pickUpAblock()
+            agent.pickUpPackage()
+            agent.score += 13
+            print("Agent Picked Up Block")
+        elif (world.map[agent.x][agent.y].isDropOff and world.map[agent.x][agent.y].canDropOffBlock and agent.canDropOff()):
+            world.map[agent.x][agent.y].dropOffBlock()
+            agent.dropOffPackage()
+            agent.score += 13
+            print("Agent Dropped Off Block")
 
+
+
+    def canPickUpAndDropOff(agent, world) -> bool:
+        return ((world.map[agent.x][agent.y].isPickUp and world.map[agent.x][agent.y].canPickUpBlock and agent.canPickUp()) or
+                (world.map[agent.x][agent.y].isDropOff and world.map[agent.x][agent.y].canDropOffBlock and agent.canDropOff()))
