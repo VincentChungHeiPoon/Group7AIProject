@@ -61,22 +61,34 @@ class SelectMove:
 
 #this method select the move with best q value, break tie by rolling a dice
 #0,1,2,3 for North, East, South, West
-    def findBestQValue(node) -> int:
-        # sort all 4, compare each to highest to see if there is a tie
-        value = [node.qNorth, node.qEast, node.qSouth, node.qWest]
+    def findBestQValue(agent, node) -> int:
+
+        value = []
+        # append all legal move
+        if (agent.canMoveNorth(0)):
+            value.append(node.qNorth)
+        if (agent.canMoveEast(4)):
+            value.append(node.qEast)
+        if (agent.canMoveSouth(4)):
+            value.append(node.qSouth)
+        if (agent.canMoveWest(0)):
+            value.append(node.qWest)
+
         value.sort(reverse=True)
+        print(value)
         #if frist 2 value is not the same, there is no tie
         if not (value[0] == value[1]):
-            if(node.qNorth == value[0]):
+            if(node.qNorth == value[0] and agent.canMoveNorth(0)):
                 return 0
-            elif(node.qEast == value[0]):
+            elif(node.qEast == value[0] and agent.canMoveEast(4)):
                 return 1
-            elif(node.qSouth == value[0]):
+            elif(node.qSouth == value[0] and agent.canMoveSouth(4)):
                 return 2
-            elif(node.qWest == value[0]):
+            elif(node.qWest == value[0] and agent.canMoveWest(0)):
                 return 3
             # append all highest index into a list, and draw a random one
         else:
+            #select all that == to largest and roll the die
             list = []
             if (node.qNorth == value[0]):
                 list.append(0)
@@ -86,6 +98,6 @@ class SelectMove:
                 list.append(2)
             if (node.qWest == value[0]):
                 list.append(3)
-
             return list[random.randint(0, (len(list) - 1))]
+
 

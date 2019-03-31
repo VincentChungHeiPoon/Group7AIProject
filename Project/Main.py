@@ -16,12 +16,14 @@ n = Node()
 
 n.qNorth = 1
 n.qSouth = 1
+n.qEast = 1
+print(SelectMove.findBestQValue(agent, n))
+print(SelectMove.findBestQValue(agent, n))
+print(SelectMove.findBestQValue(agent, n))
+print(SelectMove.findBestQValue(agent, n))
+print(SelectMove.findBestQValue(agent, n))
+print(SelectMove.findBestQValue(agent, n))
 
-print(SelectMove.findBestQValue(n))
-print(SelectMove.findBestQValue(n))
-print(SelectMove.findBestQValue(n))
-print(SelectMove.findBestQValue(n))
-print(SelectMove.findBestQValue(n))
 
 
 # SelectMove.PRANDOM(agent, world)
