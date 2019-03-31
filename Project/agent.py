@@ -8,25 +8,25 @@ class Agent:
 
 #map is inverted, 0 at top, 4 at botton
     #set of move opeorator
-    def moveUp(self, mapUpperLimiteIndex):
+    def moveNorth(self, mapUpperLimiteIndex):
         if(self.y - 1 >= mapUpperLimiteIndex):
             self.y -= 1
         else:
             print("(up) is not a valid move")
 
-    def moveDown(self, mapLowerLimitIndex):
+    def moveSouth(self, mapLowerLimitIndex):
         if(self.y + 1 <= mapLowerLimitIndex):
             self.y += 1
         else:
             print("(down) is not a valid move")
 
-    def moveLeft(self, mapLeftLimiteIndex):
+    def moveWest(self, mapLeftLimiteIndex):
         if(self.x - 1 >= mapLeftLimiteIndex):
             self.x -= 1
         else:
             print("(left) is not a valid move")
 
-    def moveRight(self, mapRightLimitIndex):
+    def moveEast(self, mapRightLimitIndex):
         if(self.x + 1 <= mapRightLimitIndex):
             self.x += 1
         else:
@@ -45,25 +45,25 @@ class Agent:
             print("(drop off package) is not a valid move")
 
     #set of check can apply opeorator
-    def canMoveUp(self, mapUpperLimiteIndex) -> bool:
+    def canMoveNorth(self, mapUpperLimiteIndex) -> bool:
         if(self.y - 1 >= mapUpperLimiteIndex):
             return True
         else:
             return False
 
-    def canMoveDown(self, mapLowerLimitIndex) -> bool:
+    def canMoveSouth(self, mapLowerLimitIndex) -> bool:
         if(self.y + 1 <= mapLowerLimitIndex):
             return True
         else:
             return False
 
-    def canMoveLeft(self, mapLeftLimiteIndex):
+    def canMoveWest(self, mapLeftLimiteIndex):
         if(self.x - 1 >= mapLeftLimiteIndex):
             return True
         else:
             return False
 
-    def canMoveRight(self, mapRightLimitIndex):
+    def canMoveEast(self, mapRightLimitIndex):
         if(self.x + 1 <= mapRightLimitIndex):
             return True
         else:

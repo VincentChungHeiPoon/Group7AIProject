@@ -7,10 +7,10 @@ class Node:
         self.isPickUp = False
         self.isDropOff = False
         self.blockCount = 0
-        self.qUp = 0
-        self.qDown = 0
-        self.qLeft = 0
-        self.qRight = 0
+        self.qNorth = 0
+        self.qEast = 0
+        self.qSouth = 0
+        self.qWest = 0
 
     def pickUpAblock(self):
         if(self.isPickUp and self.blockCount > 0):
