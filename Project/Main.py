@@ -10,12 +10,19 @@ from SelectMove import SelectMove
 agent = Agent(0,0,False)
 world = World()
 
+world.map[agent.x][agent.y].qEast = 1
 #update score after every move
 
 
 # SelectMove.PEPLOIT(agent, world)
-#SelectMove.PRANDOM(agent, world)
-
+# SelectMove.PRANDOM(agent, world)
+SelectMove.PGREEDY(agent, world)
+SelectMove.PGREEDY(agent, world)
+SelectMove.PGREEDY(agent, world)
+SelectMove.PGREEDY(agent, world)
+SelectMove.PGREEDY(agent, world)
+SelectMove.PGREEDY(agent, world)
+SelectMove.PGREEDY(agent, world)
 
 
 # print("Agent is at x: ", agent.x, " y: ", agent.y)

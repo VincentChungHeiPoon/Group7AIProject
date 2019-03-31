@@ -63,6 +63,25 @@ class SelectMove:
 
 
 
+    def PGREEDY(agent, world):
+        if (SelectMove.canPickUpAndDropOff(agent, world)):
+            SelectMove.pickUpAndDropOff(agent, world)
+        else:
+            move = SelectMove.findBestQValue(agent, world.map[agent.x][agent.y])
+            if (move == 0 and agent.canMoveNorth(0)):
+                agent.moveNorth(0)
+                print("Agent moved North")
+            elif (move == 1 and agent.canMoveEast(4)):
+                agent.moveEast(4)
+                print("Agent moved East")
+            elif (move == 2 and agent.canMoveSouth(4)):
+                agent.moveSouth(4)
+                print("Agent moved South")
+            elif (move == 3 and agent.canMoveWest(0)):
+                agent.moveWest(0)
+                print("Agent moved West")
+
+
 
 
 
@@ -96,13 +115,13 @@ class SelectMove:
         else:
             #select all that == to largest and roll the die
             list = []
-            if (node.qNorth == value[0]):
+            if (node.qNorth == value[0] and agent.canMoveNorth(0)):
                 list.append(0)
-            if (node.qEast == value[0]):
+            if (node.qEast == value[0] and agent.canMoveEast(4)):
                 list.append(1)
-            if (node.qSouth == value[0]):
+            if (node.qSouth == value[0] and agent.canMoveSouth(4)):
                 list.append(2)
-            if (node.qWest == value[0]):
+            if (node.qWest == value[0] and agent.canMoveWest(0)):
                 list.append(3)
             return list[random.randint(0, (len(list) - 1))]
 
