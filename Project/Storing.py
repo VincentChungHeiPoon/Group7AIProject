@@ -42,7 +42,6 @@ def SARSApickupordropoff(i, j, q, newi, newj, alpha, gamma):
 def SARSAmovespace(i, j, q, newi, newj, alpha, gamma):
     QMatrix[i][j][q] = QMatrix[i][j][q] + alpha(*(-1) + (gamma * QMatrix[newi][newj][q] - QMatrix[i][j][q]));
 
-
 def QUpdate(agent):
     #Receive Q-Matrix
 
