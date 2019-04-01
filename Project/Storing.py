@@ -41,13 +41,13 @@ class updateMatrix:
             world.map[oldX][oldY].qNorth = (1-alpha)*(world.map[oldX][oldY].qNorth) + (alpha)*(reward + (gamma)*nextBestQ)
         elif(movement == 1):
             # We have moved east
-            world.map[oldX][oldY].qEast = (1 - alpha) * (world.map[oldX][oldY].qNorth) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qEast = (1 - alpha) * (world.map[oldX][oldY].qEast) + (alpha) * (reward + (gamma) * nextBestQ)
         elif (movement == 2):
             # We have moved east
-            world.map[oldX][oldY].qSouth = (1 - alpha) * (world.map[oldX][oldY].qNorth) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qSouth = (1 - alpha) * (world.map[oldX][oldY].qSouth) + (alpha) * (reward + (gamma) * nextBestQ)
         elif (movement == 3):
             # We have moved east
-            world.map[oldX][oldY].qWest = (1 - alpha) * (world.map[oldX][oldY].qNorth) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qWest = (1 - alpha) * (world.map[oldX][oldY].qWest) + (alpha) * (reward + (gamma) * nextBestQ)
 
 
 
