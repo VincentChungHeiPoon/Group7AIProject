@@ -44,8 +44,8 @@ class World:
         self.setPickUp(4,4)
 
         self.setDropOff(1,4)
-        self.setDropOff(4,0)
-        self.setDropOff(4,2)
+        self.setDropOff(0,4)
+        self.setDropOff(2,4)
     #set block as pickUpBlock
     def setPickUp(self, x, y):
         self.map[x][y].isPickUp = True
