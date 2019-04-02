@@ -5,9 +5,11 @@ from PDWorld import World
 from PDWorld import Node
 import random
 from SelectMove import SelectMove
+from Storing import updateMatrix
+import copy
 
 #2d 5x5 grid
-agent = Agent(0,0,False)
+agent = Agent(0,4,False)
 
 #2 tables for agent is, is not carrying a package
 havePackageWorld = World()
@@ -19,7 +21,25 @@ havePackageWorld.map[agent.x][agent.y].qEast = 1
 
 world = havePackageWorld
 
-world.printWorld()
+
+
+for i in range(5000):
+    oldAgent = copy.deepcopy(agent)
+    #swap in worlds depends on agent's carrying a package or not
+    if not (agent.havePackage):
+       world = noPackageWorld
+    else:
+        world = havePackageWorld
+
+    SelectMove.PRANDOM(agent, world, False)
+
+    newAgent = copy.deepcopy(agent)
+
+    updateMatrix.QUpdate(oldAgent, newAgent, world, 0.5, 1)
+
+
+noPackageWorld.printWorld()
+havePackageWorld.printWorld()
 #update score after every move
 
 #SelectMove.PEPLOIT(agent, world, printMove= False)
