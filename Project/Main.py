@@ -19,6 +19,7 @@ havePackageWorld.map[agent.x][agent.y].qEast = 1
 
 world = havePackageWorld
 
+world.printWorld()
 #update score after every move
 
 #SelectMove.PEPLOIT(agent, world, printMove= False)

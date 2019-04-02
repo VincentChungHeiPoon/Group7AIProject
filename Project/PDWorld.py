@@ -54,5 +54,11 @@ class World:
     def setDropOff(self, x, y):
         self.map[x][y].isDropOff = True
 
+    def printWorld(self):
+        for x in range(0, 5):
+            for y in range(0, 5):
+                print("Location: " + str(x) + " " + str(y))
+                print("North: " + str(self.map[x][y].qNorth) + " " + "East: " + str(self.map[x][y].qEast) + " " + "South: " + str(self.map[x][y].qSouth) + " " + "West: " + str(self.map[x][y].qWest))
+
 #w = World()
 # print(w.map[0][0].blockCount)
