@@ -7,6 +7,7 @@ import random
 from SelectMove import SelectMove
 from Storing import updateMatrix
 import copy
+import pygame
 
 #2d 5x5 grid
 agent = Agent(0,4,False)
@@ -21,25 +22,27 @@ havePackageWorld.map[agent.x][agent.y].qEast = 1
 
 world = havePackageWorld
 
+pygame.init()
 
+screen = pygame.display.set_mode((800, 600))
 
-for i in range(5000):
-    oldAgent = copy.deepcopy(agent)
-    #swap in worlds depends on agent's carrying a package or not
-    if not (agent.havePackage):
-       world = noPackageWorld
-    else:
-        world = havePackageWorld
-
-    SelectMove.PRANDOM(agent, world, False)
-
-    newAgent = copy.deepcopy(agent)
-
-    updateMatrix.QUpdate(oldAgent, newAgent, world, 0.5, 1)
-
-
-noPackageWorld.printWorld()
-havePackageWorld.printWorld()
+# for i in range(5000):
+#     oldAgent = copy.deepcopy(agent)
+#     #swap in worlds depends on agent's carrying a package or not
+#     if not (agent.havePackage):
+#        world = noPackageWorld
+#     else:
+#         world = havePackageWorld
+#
+#     SelectMove.PRANDOM(agent, world, False)
+#
+#     newAgent = copy.deepcopy(agent)
+#
+#     updateMatrix.QUpdate(oldAgent, newAgent, world, 0.5, 1)
+#
+#
+# noPackageWorld.printWorld()
+# havePackageWorld.printWorld()
 #update score after every move
 
 #SelectMove.PEPLOIT(agent, world, printMove= False)
