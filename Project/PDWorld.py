@@ -35,17 +35,23 @@ class Node:
 
 class World:
     # this initialize the map for the class
-    def __init__(self):
+
+    #this method creates 2 type of maps, one have the pickup, the other with dropoff
+    def __init__(self, isPickUpMap):
         cols = 5
         rows = 5
         self.map = [[Node() for j in range(cols)] for i in range(rows)]
-        self.setPickUp(0,0)
-        self.setPickUp(2,2)
-        self.setPickUp(4,4)
 
-        self.setDropOff(1,4)
-        self.setDropOff(0,4)
-        self.setDropOff(2,4)
+        if(isPickUpMap):
+            self.setPickUp(0, 0)
+            self.setPickUp(2, 2)
+            self.setPickUp(4, 4)
+        else:
+            self.setDropOff(0, 4)
+            self.setDropOff(2, 4)
+            self.setDropOff(4, 1)
+
+
     #set block as pickUpBlock
     def setPickUp(self, x, y):
         self.map[x][y].isPickUp = True
@@ -60,5 +66,29 @@ class World:
                 print("Location: " + str(x) + " " + str(y))
                 print("North: " + str(self.map[x][y].qNorth) + " " + "East: " + str(self.map[x][y].qEast) + " " + "South: " + str(self.map[x][y].qSouth) + " " + "West: " + str(self.map[x][y].qWest))
 
-#w = World()
-# print(w.map[0][0].blockCount)
+    #this mothod checks if all pickup have package in rither pickup or dropoff
+    def isCompleteDelevery(self) -> bool:
+        for x in range(0, 5):
+            for y in range(0, 5):
+                if(self.map[x][y].isPickUp and self.map[x][y].blockCount > 0):
+                    return False
+                elif(self.map[x][y].isDropOff and self.map[x][y].blockCount < 5):
+                    return False
+
+        #if all pickup have 0 block or all dropoff have 5, return True
+        return True
+
+    #this moethod invert pick up and drop off on a map.
+    def invertPickUpDropOff(self):
+        for x in range(0, 5):
+            for y in range(0, 5):
+                if(self.map[x][y].isPickUp):
+                    self.map[x][y].isPickUp = False
+                    self.map[x][y].isDropOff = True
+                    self.map[x][y].blockCount = 0
+
+                elif(self.map[x][y].isDropOff):
+                    self.map[x][y].isDropOff = False
+                    self.map[x][y].isPickUp = True
+                    self.map[x][y].blockCount = 5
+
