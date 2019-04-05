@@ -5,15 +5,15 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+LIGHTGREY = (100, 100, 100)
 # This sets the tile size
-TILESIZE = 60
-# This sets the margin between each cell
-MARGIN = 5
+TILESIZE = 100
+
 
 class Visual:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((600, 500))
+        self.screen = pygame.display.set_mode((500, 500))
         pygame.display.set_caption("Visualization")
 
     def grid(self):
