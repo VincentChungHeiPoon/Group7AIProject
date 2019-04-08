@@ -14,12 +14,12 @@ from Visualize import *
 agent = Agent(0,4,False)
 
 #2 tables for agent is, is not carrying a package
-havePackageWorld = World(False)
-noPackageWorld = World(True)
+havePackageWorld = World()
+noPackageWorld = World()
 
 havePackageWorld.map[agent.x][agent.y].qEast = 1
 
-world = havePackageWorld
+#havePackageWorld.printWorld()
 
 show = Visual()
 show.run_visual()

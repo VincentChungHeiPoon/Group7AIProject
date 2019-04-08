@@ -37,19 +37,18 @@ class World:
     # this initialize the map for the class
 
     #this method creates 2 type of maps, one have the pickup, the other with dropoff
-    def __init__(self, isPickUpMap):
+    def __init__(self):
         cols = 5
         rows = 5
         self.map = [[Node() for j in range(cols)] for i in range(rows)]
 
-        if(isPickUpMap):
-            self.setPickUp(0, 0)
-            self.setPickUp(2, 2)
-            self.setPickUp(4, 4)
-        else:
-            self.setDropOff(0, 4)
-            self.setDropOff(2, 4)
-            self.setDropOff(4, 1)
+        self.setPickUp(0, 0)
+        self.setPickUp(2, 2)
+        self.setPickUp(4, 4)
+
+        self.setDropOff(0, 4)
+        self.setDropOff(2, 4)
+        self.setDropOff(4, 1)
 
 
     #set block as pickUpBlock
