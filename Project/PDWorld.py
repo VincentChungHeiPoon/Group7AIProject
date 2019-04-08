@@ -91,3 +91,11 @@ class World:
                     self.map[x][y].isPickUp = True
                     self.map[x][y].blockCount = 5
 
+    #map reset on
+    def mapReset(self):
+        for x in range(0, 5):
+            for y in range(0, 5):
+                if (self.map[x][y].isPickUp):
+                    self.map[x][y].blockCount = 5
+                elif (self.map[x][y].isDropOff):
+                    self.map[x][y].blockCount = 0
