@@ -13,10 +13,10 @@ import pygame
 agent = Agent(0,4,False)
 
 #2 tables for agent is, is not carrying a package
-havePackageWorld = World()
-noPackageWorld = World()
+havePackageWorld = World(False)
+noPackageWorld = World(True)
 #Temporory world that is currently being updated
-world = World()
+#world = World()
 
 havePackageWorld.map[agent.x][agent.y].qEast = 1
 
