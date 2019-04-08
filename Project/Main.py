@@ -8,6 +8,7 @@ from SelectMove import SelectMove
 from Storing import updateMatrix
 import copy
 import pygame
+from Visualize import *
 
 #2d 5x5 grid
 agent = Agent(0,4,False)
@@ -16,15 +17,17 @@ agent = Agent(0,4,False)
 havePackageWorld = World(False)
 noPackageWorld = World(True)
 #Temporory world that is currently being updated
-#world = World()
+<<<<<<< HEAD
+world = World(False)
+>>>>>>> c49c19f4d2ddcea968067ce3362cf6fe6d7c5908
 
 havePackageWorld.map[agent.x][agent.y].qEast = 1
 
 world = havePackageWorld
 
-pygame.init()
-
-screen = pygame.display.set_mode((800, 600))
+show = Visual()
+show.run_visual()
+show.quit()
 
 # for i in range(5000):
 #     oldAgent = copy.deepcopy(agent)
