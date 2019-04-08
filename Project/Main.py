@@ -16,10 +16,6 @@ agent = Agent(0,4,False)
 #2 tables for agent is, is not carrying a package
 havePackageWorld = World(False)
 noPackageWorld = World(True)
-#Temporory world that is currently being updated
-<<<<<<< HEAD
-world = World(False)
->>>>>>> c49c19f4d2ddcea968067ce3362cf6fe6d7c5908
 
 havePackageWorld.map[agent.x][agent.y].qEast = 1
 
