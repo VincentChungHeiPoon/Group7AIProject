@@ -17,14 +17,6 @@ agent = Agent(0,4,False)
 havePackageWorld = World()
 noPackageWorld = World()
 
-#havePackageWorld.map[agent.x][agent.y].qEast = 1
-
-#havePackageWorld.printWorld()
-
-# show = Visual()
-# show.run_visual()
-# show.quit()
-
 # for i in range(5000):
 #     oldAgent = copy.deepcopy(agent)
 #     #swap in worlds depends on agent's carrying a package or not

@@ -1,4 +1,7 @@
 import pygame
+from agent import Agent
+from PDWorld import World
+from PDWorld import Node
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -25,6 +28,8 @@ class Visual:
     def draw(self):
         self.screen.fill(BLACK)
         self.grid()
+        self.drawNode(0, 100)
+        self.drawNode(0, 0)
         pygame.display.flip()
 
     def run_visual(self):
@@ -39,3 +44,29 @@ class Visual:
 
     def quit(self):
         pygame.quit()
+
+#fill in each squares with 4 triangle, with the q-value
+    def drawNode(self, x, y):
+        #north
+        pygame.draw.polygon(self.screen, GREEN, [(x, y), (x + 100, y), ( x + 50, y + 50)])
+        pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + 100, y), ( x + 50, y + 50)], 3)
+
+        #east
+        pygame.draw.polygon(self.screen, GREEN, [(x + 100, y + 100), (x + 100, y), (x + 50, y + 50)])
+        pygame.draw.polygon(self.screen, WHITE, [(x + 100, y + 100), (x + 100, y), (x + 50, y + 50)], 3)
+
+        #south
+        pygame.draw.polygon(self.screen, GREEN, [(x + 100, y + 100), (x, y + 100), (x + 50, y + 50)])
+        pygame.draw.polygon(self.screen, WHITE, [(x + 100, y + 100), (x, y + 100), (x + 50, y + 50)], 3)
+
+        #west
+        pygame.draw.polygon(self.screen, GREEN, [(x, y), (x, y + 100), (x + 50, y + 50)])
+        pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + 100), (x + 50, y + 50)], 3)
+
+
+
+
+
+show = Visual()
+show.run_visual()
+show.quit()
