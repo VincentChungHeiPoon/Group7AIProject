@@ -12,6 +12,8 @@ LIGHTGREY = (100, 100, 100)
 # This sets the tile size
 TILESIZE = 100
 
+node = Node()
+
 
 class Visual:
     def __init__(self):
@@ -28,8 +30,8 @@ class Visual:
     def draw(self):
         self.screen.fill(BLACK)
         self.grid()
-        self.drawNode(0, 100)
-        self.drawNode(0, 0)
+        self.drawNode(0, 100, node)
+        self.drawNode(0, 0, node)
         pygame.display.flip()
 
     def run_visual(self):
@@ -46,22 +48,36 @@ class Visual:
         pygame.quit()
 
 #fill in each squares with 4 triangle, with the q-value
-    def drawNode(self, x, y):
+    def drawNode(self, x, y, node):
+        text = pygame.font.SysFont('Arial', 16)
         #north
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x + 100, y), ( x + 50, y + 50)])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + 100, y), ( x + 50, y + 50)], 3)
+        textCanvas = text.render(str(node.qNorth), False, BLACK)
+        self.screen.blit(textCanvas, (x + 50 - (textCanvas.get_rect().width / 2), y + 10))
 
         #east
         pygame.draw.polygon(self.screen, GREEN, [(x + 100, y + 100), (x + 100, y), (x + 50, y + 50)])
         pygame.draw.polygon(self.screen, WHITE, [(x + 100, y + 100), (x + 100, y), (x + 50, y + 50)], 3)
+        textCanvas = text.render(str(node.qEast), False, BLACK)
+        self.screen.blit(textCanvas, (x + 75 - (textCanvas.get_rect().width / 2), y + 50 - (textCanvas.get_rect().height / 2)))
 
         #south
         pygame.draw.polygon(self.screen, GREEN, [(x + 100, y + 100), (x, y + 100), (x + 50, y + 50)])
         pygame.draw.polygon(self.screen, WHITE, [(x + 100, y + 100), (x, y + 100), (x + 50, y + 50)], 3)
+        textCanvas = text.render(str(node.qEast), False, BLACK)
+        self.screen.blit(textCanvas, (x + 50 - (textCanvas.get_rect().width / 2), y + 75 - (textCanvas.get_rect().height / 2)))
 
         #west
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x, y + 100), (x + 50, y + 50)])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + 100), (x + 50, y + 50)], 3)
+        textCanvas = text.render(str(node.qEast), False, BLACK)
+        self.screen.blit(textCanvas, (x + 25 - (textCanvas.get_rect().width / 2), y + 50 - (textCanvas.get_rect().height / 2)))
+
+        a = 123
+        # textCanvas = text.render( str(node.qNorth), False, BLACK)
+        # self.screen.blit(textCanvas, (x + 50, y + 10))
+
 
 
 
