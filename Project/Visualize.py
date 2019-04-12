@@ -22,17 +22,18 @@ class Visual:
         self.screen = pygame.display.set_mode((500, 500))
         pygame.display.set_caption("Visualization")
 
-    def grid(self):
-        for x in range(0, TILESIZE*5, TILESIZE):
-            pygame.draw.line(self.screen, WHITE, (x, 0), (x, TILESIZE*5))
-        for y in range(0, TILESIZE*5, TILESIZE):
-            pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
+    # def grid(self):
+    #     for x in range(0, TILESIZE*5, TILESIZE):
+    #         pygame.draw.line(self.screen, WHITE, (x, 0), (x, TILESIZE*5))
+    #     for y in range(0, TILESIZE*5, TILESIZE):
+    #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
     def draw(self):
         self.screen.fill(BLACK)
-        self.grid()
-        self.drawNode(0, 1, node)
-        self.drawNode(0, 0, node)
+        # self.grid()
+        for x in range(5):
+            for y in range(5):
+                self.drawNode(x, y, node)
         self.drawAgentLocation(agent)
         pygame.display.flip()
 
@@ -58,25 +59,25 @@ class Visual:
         #north
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(node.qNorth), False, BLACK)
+        textCanvas = text.render(str(round(node.qNorth)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 10)))
 
         #east
         pygame.draw.polygon(self.screen, GREEN, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(node.qEast), False, BLACK)
+        textCanvas = text.render(str(round(node.qEast)), False, BLACK)
         self.screen.blit(textCanvas, (x + ((3 * TILESIZE) / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
         #south
         pygame.draw.polygon(self.screen, GREEN, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(node.qEast), False, BLACK)
+        textCanvas = text.render(str(round(node.qEast)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + 75 - (textCanvas.get_rect().height / 2)))
 
         #west
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(node.qEast), False, BLACK)
+        textCanvas = text.render(str(round(node.qEast)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
 
