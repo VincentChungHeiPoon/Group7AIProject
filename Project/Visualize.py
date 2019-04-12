@@ -6,7 +6,7 @@ from PDWorld import Node
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
+GREEN = (0, 200, 0)
 RED = (255, 0, 0)
 LIGHTGREY = (100, 100, 100)
 # This sets the tile size
@@ -21,17 +21,18 @@ class Visual:
         self.screen = pygame.display.set_mode((500, 500))
         pygame.display.set_caption("Visualization")
 
-    def grid(self):
-        for x in range(0, TILESIZE*5, TILESIZE):
-            pygame.draw.line(self.screen, WHITE, (x, 0), (x, TILESIZE*5))
-        for y in range(0, TILESIZE*5, TILESIZE):
-            pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
+    # def grid(self):
+    #     for x in range(0, TILESIZE*5, TILESIZE):
+    #         pygame.draw.line(self.screen, WHITE, (x, 0), (x, TILESIZE*5))
+    #     for y in range(0, TILESIZE*5, TILESIZE):
+    #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
     def draw(self):
         self.screen.fill(BLACK)
-        self.grid()
-        self.drawNode(0, 1, node)
-        self.drawNode(0, 0, node)
+    #    self.grid()
+        for x in range(5):
+            for y in range(5):
+                self.drawNode(x, y, node)
         pygame.display.flip()
 
     def run_visual(self):
