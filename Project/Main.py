@@ -8,7 +8,7 @@ from SelectMove import SelectMove
 from Storing import updateMatrix
 import copy
 import pygame
-from Visualize import *
+from Visualize import Visual
 
 #2d 5x5 grid
 agent = Agent(0,4,False)
@@ -17,6 +17,11 @@ agent = Agent(0,4,False)
 havePackageWorld = World()
 noPackageWorld = World()
 
+havePackageWorld.map[2][3].qWest = -2
+
+show = Visual()
+show.run_visual(noPackageWorld, havePackageWorld, agent)
+show.quit()
 # for i in range(5000):
 #     oldAgent = copy.deepcopy(agent)
 #     #swap in worlds depends on agent's carrying a package or not

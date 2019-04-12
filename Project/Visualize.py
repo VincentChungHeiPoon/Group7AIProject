@@ -15,7 +15,7 @@ TILESIZE = 100
 
 world1 = World()
 world2 = World()
-agent = Agent(4, 4, False)
+agent = Agent(1, 3, False)
 
 class Visual:
     def __init__(self):
@@ -29,7 +29,7 @@ class Visual:
     #     for y in range(0, TILESIZE*5, TILESIZE):
     #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
-    def draw(self, world1, world2):
+    def draw(self, world1, world2, agent):
         self.screen.fill(BLACK)
         # self.grid()
         for x in range(11):
@@ -39,10 +39,11 @@ class Visual:
                         self.drawNode(x, y, world1.map[x][y])
                     else:
                         self.drawNode(x, y, world2.map[x-6][y])
-        self.drawAgentLocation(agent)
+        self.drawAgentLocationLeftMap(agent)
+        self.drawAgentLocationRightMap(agent)
         pygame.display.flip()
 
-    def run_visual(self):
+    def run_visual(self, world1, world2, agent):
     # game loop - set self.playing = False to end the game
         self.running = True
         while self.running:
@@ -50,7 +51,7 @@ class Visual:
             for self.event in pygame.event.get():
                 if self.event.type == pygame.QUIT:
                     self.running = False
-            self.draw(world1, world2)
+            self.draw(world1, world2, agent)
 
     def quit(self):
         pygame.quit()
@@ -86,10 +87,15 @@ class Visual:
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
 
-    def drawAgentLocation(self, agent):
+    def drawAgentLocationLeftMap(self, agent):
         xPosition =  int((agent.x * TILESIZE) + (TILESIZE / 2))
         yPosition =  int((agent.y * TILESIZE) + (TILESIZE / 2))
         pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition , yPosition), 10)
+
+    def drawAgentLocationRightMap(self, agent):
+        xPosition =  int((agent.x * TILESIZE) + (TILESIZE / 2))
+        yPosition =  int((agent.y * TILESIZE) + (TILESIZE / 2))
+        pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition + 6 * TILESIZE, yPosition), 10)
 
 
 # This function finds the max or min given a world, oldX and oldY. Returns highest or lowest q
@@ -127,6 +133,3 @@ class Visual:
 
 
 
-show = Visual()
-show.run_visual()
-show.quit()
