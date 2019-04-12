@@ -92,6 +92,37 @@ class Visual:
         pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition , yPosition), 10)
 
 
+# This function finds the max or min given a world, oldX and oldY. Returns highest or lowest q
+    def findMax(world):
+        max = 0.0;
+        for i in range(4):
+            for j in range(4):
+                if (world.map[i][j].qNorth) > max:
+                    max = world.map[i][j].qNorth
+                if (world.map[i][j].qEast) > max:
+                    max = world.map[i][j].qEast
+                if (world.map[i][j].qSouth) > max:
+                    max = world.map[i][j].qSouth
+                if (world.map[i][j].qWest) > max:
+                    max = world.map[i][j].qWest
+        return max
+
+
+    def findMin(world):
+        min = 0.0;
+        for i in range(5):
+            for j in range(5):
+                if (world.map[i][j].qNorth) < min:
+                    min = world.map[i][j].qNorth
+                if (world.map[i][j].qEast) < min:
+                    min = world.map[i][j].qEast
+                if (world.map[i][j].qSouth) < min:
+                    min = world.map[i][j].qSouth
+                if (world.map[i][j].qWest) < min:
+                    min = world.map[i][j].qWest
+        return min
+
+
 
 
 
