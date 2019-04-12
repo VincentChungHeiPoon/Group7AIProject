@@ -65,25 +65,25 @@ class Visual:
         #north
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qNorth)), False, BLACK)
+        textCanvas = text.render(str(round(node.qNorth, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 10)))
 
         #east
         pygame.draw.polygon(self.screen, GREEN, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qEast)), False, BLACK)
+        textCanvas = text.render(str(round(node.qEast, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + ((3 * TILESIZE) / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
         #south
         pygame.draw.polygon(self.screen, GREEN, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qSouth)), False, BLACK)
+        textCanvas = text.render(str(round(node.qSouth, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + 75 - (textCanvas.get_rect().height / 2)))
 
         #west
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qWest)), False, BLACK)
+        textCanvas = text.render(str(round(node.qWest, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
 
