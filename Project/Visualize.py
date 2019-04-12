@@ -30,7 +30,7 @@ class Visual:
     def draw(self):
         self.screen.fill(BLACK)
         self.grid()
-        self.drawNode(0, 100, node)
+        self.drawNode(0, 1, node)
         self.drawNode(0, 0, node)
         pygame.display.flip()
 
@@ -49,6 +49,9 @@ class Visual:
 
 #fill in each squares with 4 triangle, with the q-value
     def drawNode(self, x, y, node):
+
+        x *= 100
+        y *= 100
         text = pygame.font.SysFont('Arial', 16)
         #north
         pygame.draw.polygon(self.screen, GREEN, [(x, y), (x + 100, y), ( x + 50, y + 50)])
