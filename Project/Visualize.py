@@ -20,7 +20,7 @@ agent = Agent(1, 3, False)
 class Visual:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((1100, 500))
+        self.screen = pygame.display.set_mode((1100, 600))
         pygame.display.set_caption("Visualization")
 
     # def grid(self):
@@ -41,7 +41,22 @@ class Visual:
                         self.drawNode(x, y, world2.map[x-6][y])
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
+        self.addText()
         pygame.display.flip()
+
+    def addText(self):
+        font = pygame.font.SysFont('Arial', 30)
+        info = "Agent with package"
+        text = font.render(info, False, WHITE)
+        self.screen.blit(text, (0, 500))
+
+        info2 = "Agent without package"
+        text = font.render(info2, False, WHITE)
+        self.screen.blit(text, (600, 500))
+
+        info3 = "Operator Counter: " + "                     Agent Reward: "
+        text = font.render(info3, False, WHITE)
+        self.screen.blit(text, (0, 550))
 
     def run_visual(self, world1, world2, agent):
     # game loop - set self.playing = False to end the game
