@@ -17,28 +17,31 @@ agent = Agent(0,4,False)
 havePackageWorld = World()
 noPackageWorld = World()
 
-havePackageWorld.map[2][3].qWest = -2
+# havePackageWorld.map[2][3].qWest = -2
+#
+# show = Visual()
+# show.run_visual(noPackageWorld, havePackageWorld, agent)
+# show.quit()
 
+for i in range(1000):
+    oldAgent = copy.deepcopy(agent)
+    #swap in worlds depends on agent's carrying a package or not
+    if not (agent.havePackage):
+       world = noPackageWorld
+    else:
+        world = havePackageWorld
+
+    SelectMove.PRANDOM(agent, world, False)
+
+    newAgent = copy.deepcopy(agent)
+
+    updateMatrix.QUpdate(oldAgent, newAgent, world, 0.5, 1)
+
+print(agent.steps)
 show = Visual()
 show.run_visual(noPackageWorld, havePackageWorld, agent)
 show.quit()
-# for i in range(5000):
-#     oldAgent = copy.deepcopy(agent)
-#     #swap in worlds depends on agent's carrying a package or not
-#     if not (agent.havePackage):
-#        world = noPackageWorld
-#     else:
-#         world = havePackageWorld
-#
-#     SelectMove.PRANDOM(agent, world, False)
-#
-#     newAgent = copy.deepcopy(agent)
-#
-#     updateMatrix.QUpdate(oldAgent, newAgent, world, 0.5, 1)
-#
-#
-# noPackageWorld.printWorld()
-# havePackageWorld.printWorld()
+
 #update score after every move
 
 #SelectMove.PEPLOIT(agent, world, printMove= False)

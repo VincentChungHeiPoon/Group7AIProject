@@ -5,6 +5,7 @@ class Agent:
         self.y = startingY
         self.havePackage = havePackage
         self.score = 0
+        self.steps = 0
 
 #map is inverted, 0 at top, 4 at botton
     #set of move opeorator
@@ -12,6 +13,7 @@ class Agent:
         if(self.y - 1 >= 0):
             self.y -= 1
             self.score -= 1
+            self.steps += 1
         else:
             print("(up) is not a valid move")
 
@@ -19,6 +21,7 @@ class Agent:
         if(self.y + 1 <= 4):
             self.y += 1
             self.score -= 1
+            self.steps += 1
         else:
             print("(down) is not a valid move")
 
@@ -26,6 +29,7 @@ class Agent:
         if(self.x - 1 >= 0):
             self.x -= 1
             self.score -= 1
+            self.steps += 1
         else:
             print("(left) is not a valid move")
 
@@ -33,6 +37,7 @@ class Agent:
         if(self.x + 1 <= 4):
             self.x += 1
             self.score -= 1
+            self.steps += 1
         else:
             print("(right) is not a valid move")
 
@@ -40,6 +45,7 @@ class Agent:
         if not (self.havePackage):
             self.havePackage = True
             self.score += 13
+            self.steps += 1
         else:
             print("(pick up package) is not a valid move")
 
@@ -47,6 +53,7 @@ class Agent:
         if(self.havePackage):
             self.havePackage = False
             self.score += 13
+            self.steps += 1
         else:
             print("(drop off package) is not a valid move")
 
