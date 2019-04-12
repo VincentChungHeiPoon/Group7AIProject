@@ -41,10 +41,10 @@ class Visual:
                         self.drawNode(x, y, world2.map[x-6][y])
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
-        self.addText()
+        self.addText(agent)
         pygame.display.flip()
 
-    def addText(self):
+    def addText(self, agent):
         font = pygame.font.SysFont('Arial', 30)
         info = "Agent with package"
         text = font.render(info, False, WHITE)
@@ -54,7 +54,7 @@ class Visual:
         text = font.render(info2, False, WHITE)
         self.screen.blit(text, (600, 500))
 
-        info3 = "Operator Counter: " + "                     Agent Reward: "
+        info3 = "Operator Counter: " + str(agent.steps) + "                   Agent Reward: " + str(agent.score)
         text = font.render(info3, False, WHITE)
         self.screen.blit(text, (0, 550))
 
