@@ -13,13 +13,14 @@ AGENTCOLOR = (20, 180, 200)
 # This sets the tile size
 TILESIZE = 100
 
-world = World()
+world1 = World()
+world2 = World()
 agent = Agent(4, 4, False)
 
 class Visual:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((500, 500))
+        self.screen = pygame.display.set_mode((1100, 500))
         pygame.display.set_caption("Visualization")
 
     # def grid(self):
@@ -28,12 +29,16 @@ class Visual:
     #     for y in range(0, TILESIZE*5, TILESIZE):
     #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
-    def draw(self, world):
+    def draw(self, world1, world2):
         self.screen.fill(BLACK)
         # self.grid()
-        for x in range(5):
-            for y in range(5):
-                self.drawNode(x, y, world.map[x][y])
+        for x in range(11):
+            if x != 5:
+                for y in range(5):
+                    if x < 5:
+                        self.drawNode(x, y, world1.map[x][y])
+                    else:
+                        self.drawNode(x, y, world2.map[x-6][y])
         self.drawAgentLocation(agent)
         pygame.display.flip()
 
@@ -45,7 +50,7 @@ class Visual:
             for self.event in pygame.event.get():
                 if self.event.type == pygame.QUIT:
                     self.running = False
-            self.draw(world)
+            self.draw(world1, world2)
 
     def quit(self):
         pygame.quit()
