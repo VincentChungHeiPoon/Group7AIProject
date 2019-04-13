@@ -36,13 +36,6 @@ class Visual:
         w2Maxq = self.findMax(world2)
         w2Minq = self.findMin(world2)
 
-        print(w1Maxq)
-        print(w1Minq)
-
-        print(w2Maxq)
-        print(w2Minq)
-        # self.grid()
-
         for x in range(11):
             if x != 5:
                 for y in range(5):

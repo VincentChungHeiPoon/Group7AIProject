@@ -47,7 +47,7 @@ class E1:
             world = havePackageWorld
             world.worldUpdate(noPackageWorld, havePackageWorld)
 
-        SelectMove.PGREEDY(agent, world, True)
+        SelectMove.PGREEDY(agent, world, False)
 
         updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, .5)
         if (world.isCompleteDelevery()):
