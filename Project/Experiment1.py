@@ -44,12 +44,13 @@ class E1:
             world.worldUpdate(noPackageWorld, havePackageWorld)
 
         SelectMove.PGREEDY(agent, world, False)
-        newAgent = copy.deepcopy(agent)
-        updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 1)
+
+        updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, .5)
         if (world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
             print("MapReset")
+
 
 
     show = Visual()
