@@ -99,3 +99,9 @@ class World:
                     self.map[x][y].blockCount = 5
                 elif (self.map[x][y].isDropOff):
                     self.map[x][y].blockCount = 0
+
+    #update world2's blockcount on all nodes to world1
+    def worldUpdate(self, world1, world2):
+        for x in range(0, 5):
+            for y in range(0, 5):
+                world2.map[x][y].blockCount = world1.map[x][y].blockCount

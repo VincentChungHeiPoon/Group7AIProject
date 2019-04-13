@@ -158,4 +158,3 @@ class SelectMove:
         return ((world.map[agent.x][agent.y].isPickUp and world.map[agent.x][agent.y].canPickUpBlock() and agent.canPickUp()) or
                 (world.map[agent.x][agent.y].isDropOff and world.map[agent.x][agent.y].canDropOffBlock() and agent.canDropOff()))
 
-
