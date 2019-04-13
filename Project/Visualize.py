@@ -13,10 +13,6 @@ AGENTCOLOR = (20, 180, 200)
 # This sets the tile size
 TILESIZE = 100
 
-world1 = World()
-world2 = World()
-agent = Agent(1, 3, False)
-
 class Visual:
     def __init__(self):
         pygame.init()
@@ -29,16 +25,28 @@ class Visual:
     #     for y in range(0, TILESIZE*5, TILESIZE):
     #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
+#world 1 is world with no packagr, world 2 is with package
     def draw(self, world1, world2, agent):
         self.screen.fill(BLACK)
+        w1Maxq = self.findMax(world1)
+        w1Minq = self.findMin(world1)
+
+        w2Maxq = self.findMax(world2)
+        w2Minq = self.findMin(world2)
+
+        print(w1Maxq)
+        print(w1Minq)
+
+        print(w2Maxq)
+        print(w2Minq)
         # self.grid()
         for x in range(11):
             if x != 5:
                 for y in range(5):
                     if x < 5:
-                        self.drawNode(x, y, world1.map[x][y])
+                        self.drawNode(x, y, world1.map[x][y], w1Maxq, w1Minq)
                     else:
-                        self.drawNode(x, y, world2.map[x-6][y])
+                        self.drawNode(x, y, world2.map[x-6][y], w2Maxq, w2Minq)
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
         self.addText(agent)
@@ -46,11 +54,11 @@ class Visual:
 
     def addText(self, agent):
         font = pygame.font.SysFont('Arial', 30)
-        info = "Agent with package"
+        info = "Agent without package"
         text = font.render(info, False, WHITE)
         self.screen.blit(text, (0, 500))
 
-        info2 = "Agent without package"
+        info2 = "Agent with package"
         text = font.render(info2, False, WHITE)
         self.screen.blit(text, (600, 500))
 
@@ -94,31 +102,37 @@ class Visual:
         pygame.quit()
 
 #fill in each squares with 4 triangle, with the q-value
-    def drawNode(self, x, y, node):
+    def drawNode(self, x, y, node, maxq, minq):
 
         x *= 100
         y *= 100
         text = pygame.font.SysFont('Arial', 16)
+
+
         #north
-        pygame.draw.polygon(self.screen, GREEN, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
+        color = self.getGradient(maxq, minq, node.qNorth)
+        pygame.draw.polygon(self.screen, color, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qNorth, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 10)))
 
         #east
-        pygame.draw.polygon(self.screen, GREEN, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
+        color = self.getGradient(maxq, minq, node.qEast)
+        pygame.draw.polygon(self.screen, color, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qEast, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + ((3 * TILESIZE) / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
         #south
-        pygame.draw.polygon(self.screen, GREEN, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
+        color = self.getGradient(maxq, minq, node.qSouth)
+        pygame.draw.polygon(self.screen, color, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qSouth, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + 75 - (textCanvas.get_rect().height / 2)))
 
         #west
-        pygame.draw.polygon(self.screen, GREEN, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
+        color = self.getGradient(maxq, minq, node.qWest)
+        pygame.draw.polygon(self.screen, color, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qWest, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
@@ -136,10 +150,10 @@ class Visual:
 
 
 # This function finds the max or min given a world, oldX and oldY. Returns highest or lowest q
-    def findMax(world):
+    def findMax(self, world):
         max = 0.0;
-        for i in range(4):
-            for j in range(4):
+        for i in range(5):
+            for j in range(5):
                 if (world.map[i][j].qNorth) > max:
                     max = world.map[i][j].qNorth
                 if (world.map[i][j].qEast) > max:
@@ -151,7 +165,7 @@ class Visual:
         return max
 
 
-    def findMin(world):
+    def findMin(self, world):
         min = 0.0;
         for i in range(5):
             for j in range(5):

@@ -37,7 +37,6 @@ for i in range(1000):
 
     updateMatrix.QUpdate(oldAgent, newAgent, world, 0.5, 1)
 
-print(agent.steps)
 show = Visual()
 show.run_visual(noPackageWorld, havePackageWorld, agent)
 show.quit()
