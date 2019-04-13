@@ -85,8 +85,10 @@ class Visual:
             sminq = 1
         if currq > maxq or currq < minq:
             return (0,0,255)
-            
-        if currq >= 0:
+
+        if currq == 0:
+            return LIGHTGREY
+        elif currq > 0:
             scale = currq/smaxq
             g = scale*255
         else:
@@ -120,28 +122,28 @@ class Visual:
         color = self.getGradient(maxq, minq, node.qNorth)
         pygame.draw.polygon(self.screen, color, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qNorth, 2)), False, BLACK)
+        textCanvas = text.render(str(round(node.qNorth, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 10)))
 
         #east
         color = self.getGradient(maxq, minq, node.qEast)
         pygame.draw.polygon(self.screen, color, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qEast, 2)), False, BLACK)
+        textCanvas = text.render(str(round(node.qEast, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + ((3 * TILESIZE) / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
         #south
         color = self.getGradient(maxq, minq, node.qSouth)
         pygame.draw.polygon(self.screen, color, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qSouth, 2)), False, BLACK)
+        textCanvas = text.render(str(round(node.qSouth, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + 75 - (textCanvas.get_rect().height / 2)))
 
         #west
         color = self.getGradient(maxq, minq, node.qWest)
         pygame.draw.polygon(self.screen, color, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
-        textCanvas = text.render(str(round(node.qWest, 2)), False, BLACK)
+        textCanvas = text.render(str(round(node.qWest, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
     def drawAgentLocationLeftMap(self, agent):
