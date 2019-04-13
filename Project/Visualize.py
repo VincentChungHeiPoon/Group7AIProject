@@ -10,7 +10,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 LIGHTGREY = (100, 100, 100)
 AGENTCOLOR = (20, 180, 200)
-# This sets the tile size
+
 TILESIZE = 100
 
 world1 = World()
@@ -29,9 +29,9 @@ class Visual:
     #     for y in range(0, TILESIZE*5, TILESIZE):
     #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
+# Contains all the content for the window
     def draw(self, world1, world2, agent):
         self.screen.fill(BLACK)
-        # self.grid()
         for x in range(11):
             if x != 5:
                 for y in range(5):
@@ -44,6 +44,7 @@ class Visual:
         self.addText(agent)
         pygame.display.flip()
 
+# Adds text to label grids, and show counter/reward
     def addText(self, agent):
         font = pygame.font.SysFont('Arial', 30)
         info = "Agent with package"
@@ -54,11 +55,15 @@ class Visual:
         text = font.render(info2, False, WHITE)
         self.screen.blit(text, (600, 500))
 
-        info3 = "Operator Counter: " + str(agent.steps) + "                   Agent Reward: " + str(agent.score)
+        info3 = "Operator Counter: " + str(agent.steps)
         text = font.render(info3, False, WHITE)
         self.screen.blit(text, (0, 550))
 
-    #function to determine color gradient based on max and min q values
+        info4 = "Agent Reward: " + str(agent.score)
+        text = font.render(info4, False, WHITE)
+        self.screen.blit(text, (400, 550))
+
+# Function to determine color gradient based on max and min q values
     def getGradient(self, maxq, minq, currq):
         g = 0
         r = 0
@@ -79,9 +84,10 @@ class Visual:
             scale = currq/sminq
             r = scale*255
         return (r,g,0)
-    
+
+# Keeps window open until we quit by closing window
+# Set self.playing = False to end the game
     def run_visual(self, world1, world2, agent):
-    # game loop - set self.playing = False to end the game
         self.running = True
         while self.running:
             pygame.time.delay(1000)
@@ -93,9 +99,8 @@ class Visual:
     def quit(self):
         pygame.quit()
 
-#fill in each squares with 4 triangle, with the q-value
+# Fill in each squares with 4 triangle, with the q-value
     def drawNode(self, x, y, node):
-
         x *= 100
         y *= 100
         text = pygame.font.SysFont('Arial', 16)
@@ -123,7 +128,6 @@ class Visual:
         textCanvas = text.render(str(round(node.qWest, 2)), False, BLACK)
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
-
     def drawAgentLocationLeftMap(self, agent):
         xPosition =  int((agent.x * TILESIZE) + (TILESIZE / 2))
         yPosition =  int((agent.y * TILESIZE) + (TILESIZE / 2))
@@ -133,7 +137,6 @@ class Visual:
         xPosition =  int((agent.x * TILESIZE) + (TILESIZE / 2))
         yPosition =  int((agent.y * TILESIZE) + (TILESIZE / 2))
         pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition + 6 * TILESIZE, yPosition), 10)
-
 
 # This function finds the max or min given a world, oldX and oldY. Returns highest or lowest q
     def findMax(world):
@@ -150,7 +153,6 @@ class Visual:
                     max = world.map[i][j].qWest
         return max
 
-
     def findMin(world):
         min = 0.0;
         for i in range(5):
@@ -164,9 +166,3 @@ class Visual:
                 if (world.map[i][j].qWest) < min:
                     min = world.map[i][j].qWest
         return min
-
-
-
-
-
-
