@@ -23,26 +23,32 @@ noPackageWorld = World()
 # show.run_visual(noPackageWorld, havePackageWorld, agent)
 # show.quit()
 
-for i in range(2):
-    oldAgent = copy.deepcopy(agent)
-    #swap in worlds depends on agent's carrying a package or not
+agent = Agent(0, 4, False)
+oldAgent = copy.deepcopy(agent)
+old2Agent = copy.deepcopy(agent)
+havePackageWorld = World()
+noPackageWorld = World()
+
+for i in range(2000):
+
     if not (agent.havePackage):
-       world = noPackageWorld
-       world.worldUpdate(havePackageWorld, noPackageWorld)
+        world = noPackageWorld
     else:
         world = havePackageWorld
-        world.worldUpdate(noPackageWorld, havePackageWorld)
 
-    world.map[0][1].qSouth = 2
-    SelectMove.PGREEDY(agent, world, True)
+    oldAgent2 = copy.deepcopy(oldAgent)
+    oldAgent = copy.deepcopy(agent)
 
+    SelectMove.PRANDOM(agent, world, True)
     newAgent = copy.deepcopy(agent)
 
-    updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 0.5)
 
-# show = Visual()
-# show.run_visual(noPackageWorld, havePackageWorld, agent)
-# show.quit()
+    # if(i > 2):
+    #     updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, world, .3, 1)
+
+show = Visual()
+show.run_visual(noPackageWorld, havePackageWorld, agent)
+show.quit()
 
 #update score after every move
 

@@ -66,6 +66,12 @@ class updateMatrix:
         #move 1 is opeorator applied on state 1 to get to state 2, and move 2 is from 2 to 3
 
         state2Q = [world.map[agent2.x][agent2.y].qNorth, world.map[agent2.x][agent2.y].qEast, world.map[agent2.x][agent2.y].qSouth, world.map[agent2.x][agent2.y].qWest]
+
+        #if agent stays on the same state, like 2 -> pickup -> 2, then we will piack the best q on state 2 to update
+        if(move2 == 4):
+            move2 = state2Q.index(max(state2Q))
+
+
         reward = agent2.score - agent1.score
         if (move1 == 0):
             # We have moved north
@@ -76,11 +82,11 @@ class updateMatrix:
             world.map[agent1.x][agent1.y].qEast = (1 - alpha) * (world.map[agent1.x][agent1.y].qEast) + (alpha) * (
                         reward + (gamma) * state2Q[move2])
         elif (move1 == 2):
-            # We have moved east
+            # We have moved south
             world.map[agent1.x][agent1.y].qSouth = (1 - alpha) * (world.map[agent1.x][agent1.y].qSouth) + (alpha) * (
                         reward + (gamma) * state2Q[move2])
         elif (move1 == 3):
-            # We have moved east
+            # We have moved west
             world.map[agent1.x][agent1.y].qWest = (1 - alpha) * (world.map[agent1.x][agent1.y].qWest) + (alpha) * (
                         reward + (gamma) * state2Q[move2])
         elif (move1 == 4):

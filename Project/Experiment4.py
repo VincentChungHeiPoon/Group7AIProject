@@ -8,11 +8,13 @@ from Visualize import Visual
 class E4:
 
     agent = Agent(0, 4, False)
+    oldAgent = copy.deepcopy(agent)
     havePackageWorld = World()
     noPackageWorld = World()
 
     for i in range(200):
-        oldAgent = copy.deepcopy(agent)
+        oldAgent2 = copy.deepcopy(oldAgent)
+        oldAgent1 = copy.deepcopy(agent)
         if not (agent.havePackage):
             world = noPackageWorld
         else:
@@ -20,7 +22,7 @@ class E4:
 
         SelectMove.PRANDOM(agent, world, False)
         newAgent = copy.deepcopy(agent)
-        updateMatrix.SARSAUpdate(oldAgent, newAgent, world, .3, 1)
+        updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, agent,  world, .3, 1)
 
     for j in range(7800):
         oldAgent = copy.deepcopy(agent)
