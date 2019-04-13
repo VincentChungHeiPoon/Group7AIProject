@@ -1,21 +1,17 @@
 from agent import Agent
 from PDWorld import World
-from PDWorld import Node
-import random
 from SelectMove import SelectMove
 from Storing import updateMatrix
 import copy
-import pygame
 from Visualize import Visual
-class E1:
 
+class E4:
 
     agent = Agent(0, 4, False)
-
     havePackageWorld = World()
     noPackageWorld = World()
 
-    for i in range(4000):
+    for i in range(200):
         oldAgent = copy.deepcopy(agent)
         if not (agent.havePackage):
             world = noPackageWorld
@@ -24,23 +20,19 @@ class E1:
 
         SelectMove.PRANDOM(agent, world, False)
         newAgent = copy.deepcopy(agent)
-        updateMatrix.QUpdate(oldAgent, newAgent, world, .3, .5)
+        updateMatrix.SARSAUpdate(oldAgent, newAgent, world, .3, 1)
 
-
-    for j in range(4000):
+    for j in range(7800):
         oldAgent = copy.deepcopy(agent)
         if not (agent.havePackage):
             world = noPackageWorld
         else:
             world = havePackageWorld
 
-        SelectMove.PGREEDY(agent, world, False)
+        SelectMove.PEPLOIT(agent, world, False)
         newAgent = copy.deepcopy(agent)
-        updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 1)
-
-
+        updateMatrix.SARSAUpdate(oldAgent, newAgent, world, .3, 1)
 
     show = Visual()
     show.run_visual(noPackageWorld, havePackageWorld, agent)
     show.quit()
-
