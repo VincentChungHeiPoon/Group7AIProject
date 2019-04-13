@@ -99,7 +99,6 @@ class updateMatrix:
                         reward + (gamma) * state2Q[move2])
             world.map[agent1.x][agent1.y].qWest = (1 - alpha) * (world.map[agent1.x][agent1.y].qWest) + (alpha) * (
                         reward + (gamma) * state2Q[move2])
-
         #we will put all 4  value of state 2 into
 
 

@@ -32,7 +32,6 @@ class E2:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
-            print("MapReset")
     #Show progress after PRANDOM
     show.run_visual(noPackageWorld, havePackageWorld, agent)
 
@@ -58,7 +57,6 @@ class E2:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
-            print("MapReset")
             
     #show = Visual()
     show.run_visual(noPackageWorld, havePackageWorld, agent)

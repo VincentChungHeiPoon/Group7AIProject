@@ -1,3 +1,4 @@
+#this file is mainly for testing purpose
 #if you have a class you created, use the syntax from "file" import "class"
 #aware that file do not have .py extension anymore
 from agent import Agent
@@ -17,38 +18,36 @@ agent = Agent(0,1,False)
 havePackageWorld = World()
 noPackageWorld = World()
 
-# havePackageWorld.map[2][3].qWest = -2
-#
-# show = Visual()
-# show.run_visual(noPackageWorld, havePackageWorld, agent)
-# show.quit()
-
-agent = Agent(0, 4, False)
-oldAgent = copy.deepcopy(agent)
+agent = Agent(4, 0, False)
+oldAgent1 = copy.deepcopy(agent)
 old2Agent = copy.deepcopy(agent)
+
 havePackageWorld = World()
 noPackageWorld = World()
 
-for i in range(2000):
+for i in range(100):
+
+    oldAgent2 = copy.deepcopy(oldAgent1)
+    oldAgent1 = copy.deepcopy(agent)
 
     if not (agent.havePackage):
         world = noPackageWorld
+        world.worldUpdate(havePackageWorld, noPackageWorld)
     else:
         world = havePackageWorld
+        world.worldUpdate(noPackageWorld, havePackageWorld)
 
-    oldAgent2 = copy.deepcopy(oldAgent)
-    oldAgent = copy.deepcopy(agent)
-
-    SelectMove.PRANDOM(agent, world, True)
+    SelectMove.PRANDOM(agent, world, False)
     newAgent = copy.deepcopy(agent)
 
 
-    # if(i > 2):
-    #     updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, world, .3, 1)
+    if(i >= 1):
+        updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, world, .3, 1)
 
 show = Visual()
 show.run_visual(noPackageWorld, havePackageWorld, agent)
 show.quit()
+
 
 #update score after every move
 
@@ -57,5 +56,3 @@ show.quit()
 #SelectMove.PRANDOM(agent, world, printMove= False)
 
 #SelectMove.PGREEDY(agent, world, printMove= False)
-
-# print("Agent is at x: ", agent.x, " y: ", agent.y)
