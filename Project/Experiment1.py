@@ -19,25 +19,37 @@ class E1:
         oldAgent = copy.deepcopy(agent)
         if not (agent.havePackage):
             world = noPackageWorld
+            world.worldUpdate(havePackageWorld, noPackageWorld)
         else:
             world = havePackageWorld
+            world.worldUpdate(noPackageWorld, havePackageWorld)
 
         SelectMove.PRANDOM(agent, world, False)
         newAgent = copy.deepcopy(agent)
         updateMatrix.QUpdate(oldAgent, newAgent, world, .3, .5)
+        if(world.isCompleteDelevery()):
+            noPackageWorld.mapReset()
+            havePackageWorld.mapReset()
+            print("MapReset")
+
 
 
     for j in range(4000):
         oldAgent = copy.deepcopy(agent)
         if not (agent.havePackage):
             world = noPackageWorld
+            world.worldUpdate(havePackageWorld, noPackageWorld)
         else:
             world = havePackageWorld
+            world.worldUpdate(noPackageWorld, havePackageWorld)
 
         SelectMove.PGREEDY(agent, world, False)
         newAgent = copy.deepcopy(agent)
         updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 1)
-
+        if (world.isCompleteDelevery()):
+            noPackageWorld.mapReset()
+            havePackageWorld.mapReset()
+            print("MapReset")
 
 
     show = Visual()
