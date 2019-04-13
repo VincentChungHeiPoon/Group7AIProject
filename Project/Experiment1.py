@@ -36,7 +36,7 @@ class E1:
 
         SelectMove.PGREEDY(agent, world, False)
         newAgent = copy.deepcopy(agent)
-        updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 1)
+        updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, .5)
 
 
 
