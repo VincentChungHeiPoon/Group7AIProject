@@ -25,7 +25,7 @@ old2Agent = copy.deepcopy(agent)
 havePackageWorld = World()
 noPackageWorld = World()
 
-for i in range(100):
+for i in range(4000):
 
     oldAgent2 = copy.deepcopy(oldAgent1)
     oldAgent1 = copy.deepcopy(agent)
@@ -40,9 +40,17 @@ for i in range(100):
     SelectMove.PRANDOM(agent, world, False)
     newAgent = copy.deepcopy(agent)
 
+    #we need to decide what world we need to update on as it lacks behine 2 steps n bugs when world change
 
     if(i >= 1):
-        updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, world, .3, 1)
+        if not (oldAgent2.havePackage):
+            updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, noPackageWorld, .3, 1)
+        elif (oldAgent2.havePackage):
+            updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, havePackageWorld, .3, 1)
+
+    if (world.isCompleteDelevery()):
+        noPackageWorld.mapReset()
+        havePackageWorld.mapReset()
 
 show = Visual()
 show.run_visual(noPackageWorld, havePackageWorld, agent)

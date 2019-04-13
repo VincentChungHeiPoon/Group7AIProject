@@ -30,7 +30,6 @@ class E1:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
-            print("MapReset")
 
         if( i == 1999):
             show.run_visual(noPackageWorld, havePackageWorld, agent)
