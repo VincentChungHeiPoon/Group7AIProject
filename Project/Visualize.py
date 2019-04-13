@@ -58,6 +58,28 @@ class Visual:
         text = font.render(info3, False, WHITE)
         self.screen.blit(text, (0, 550))
 
+    #function to determine color gradient based on max and min q values
+    def getGradient(self, maxq, minq, currq):
+        g = 0
+        r = 0
+        #error prevention features
+        smaxq = maxq
+        sminq = minq
+        if maxq == 0:
+            smaxq = 1
+        if minq == 0:
+            sminq = 1
+        if currq > maxq or currq < minq:
+            return (0,0,255)
+            
+        if currq >= 0:
+            scale = currq/smaxq
+            g = scale*255
+        else:
+            scale = currq/sminq
+            r = scale*255
+        return (r,g,0)
+    
     def run_visual(self, world1, world2, agent):
     # game loop - set self.playing = False to end the game
         self.running = True
