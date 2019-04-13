@@ -11,7 +11,7 @@ import pygame
 from Visualize import Visual
 
 #2d 5x5 grid
-agent = Agent(0,0,False)
+agent = Agent(0,1,False)
 
 #2 tables for agent is, is not carrying a package
 havePackageWorld = World()
@@ -23,7 +23,7 @@ noPackageWorld = World()
 # show.run_visual(noPackageWorld, havePackageWorld, agent)
 # show.quit()
 
-for i in range(1000):
+for i in range(2):
     oldAgent = copy.deepcopy(agent)
     #swap in worlds depends on agent's carrying a package or not
     if not (agent.havePackage):
@@ -33,15 +33,16 @@ for i in range(1000):
         world = havePackageWorld
         world.worldUpdate(noPackageWorld, havePackageWorld)
 
-    SelectMove.PRANDOM(agent, world, False)
+    world.map[0][1].qSouth = 2
+    SelectMove.PGREEDY(agent, world, True)
 
     newAgent = copy.deepcopy(agent)
 
     updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 0.5)
 
-show = Visual()
-show.run_visual(noPackageWorld, havePackageWorld, agent)
-show.quit()
+# show = Visual()
+# show.run_visual(noPackageWorld, havePackageWorld, agent)
+# show.quit()
 
 #update score after every move
 
