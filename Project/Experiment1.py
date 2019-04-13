@@ -8,7 +8,7 @@ import copy
 import pygame
 from Visualize import Visual
 class E1:
-
+    show = Visual()
 
     agent = Agent(0, 4, False)
 
@@ -32,6 +32,10 @@ class E1:
             havePackageWorld.mapReset()
             print("MapReset")
 
+        if( i == 1999):
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
+        if( i == 3999):
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
 
 
     for j in range(4000):
@@ -43,7 +47,7 @@ class E1:
             world = havePackageWorld
             world.worldUpdate(noPackageWorld, havePackageWorld)
 
-        SelectMove.PGREEDY(agent, world, False)
+        SelectMove.PGREEDY(agent, world, True)
 
         updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, .5)
         if (world.isCompleteDelevery()):
@@ -51,9 +55,13 @@ class E1:
             havePackageWorld.mapReset()
             print("MapReset")
 
+        if (j == 1999):
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
+        if (j == 3999):
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
 
 
-    show = Visual()
-    show.run_visual(noPackageWorld, havePackageWorld, agent)
-    show.quit()
+    # show = Visual()
+    # show.run_visual(noPackageWorld, havePackageWorld, agent)
+    # show.quit()
 
