@@ -30,7 +30,13 @@ class E3:
 
         SelectMove.PRANDOM(agent, world, False)
         newAgent = copy.deepcopy(agent)
-        updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, world, 0.3, .5)
+
+        if (i >= 1):
+            if not (oldAgent2.havePackage):
+                updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, noPackageWorld, .3, .5)
+            elif (oldAgent2.havePackage):
+                updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, havePackageWorld, .3, .5)
+
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
