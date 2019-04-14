@@ -72,7 +72,7 @@ class SelectMove:
                         print("Agent moved West")
 
 
-
+#select move with best q-value
     def PGREEDY(agent, world, printMove):
         if (SelectMove.canPickUpAndDropOff(agent, world)):
             SelectMove.pickUpAndDropOff(agent, world, printMove)
@@ -153,7 +153,7 @@ class SelectMove:
                 print("Agent Dropped Off Block")
 
 
-
+#this method checks if pickup/dropoff is applicable
     def canPickUpAndDropOff(agent, world) -> bool:
         return ((world.map[agent.x][agent.y].isPickUp and world.map[agent.x][agent.y].canPickUpBlock() and agent.canPickUp()) or
                 (world.map[agent.x][agent.y].isDropOff and world.map[agent.x][agent.y].canDropOffBlock() and agent.canDropOff()))

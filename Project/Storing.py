@@ -8,6 +8,7 @@ from SelectMove import SelectMove
 
 class updateMatrix:
 
+#this method find out what opeorator is applied given old and new agents
     def moveDirection(oldAgent, newAgent) -> int:
         # 0,1,2,3,4 for North, East, South, West, stayput(pickup/dropoff)
         # if stayput

@@ -11,6 +11,7 @@ import copy
 import pygame
 from Visualize import Visual
 
+#sample for how to apply SARSA
 #2d 5x5 grid
 agent = Agent(0,1,False)
 
@@ -56,7 +57,7 @@ show = Visual()
 show.run_visual(noPackageWorld, havePackageWorld, agent)
 show.quit()
 
-
+# sample for how to apply opeoratoes
 #update score after every move
 
 #SelectMove.PEPLOIT(agent, world, printMove= False)

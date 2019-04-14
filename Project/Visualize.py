@@ -1,3 +1,4 @@
+#this file is used to visualize the pd world
 import pygame
 from agent import Agent
 from PDWorld import World
@@ -21,27 +22,21 @@ class Visual:
         self.screen = pygame.display.set_mode((1100, 600))
         pygame.display.set_caption("Visualization")
 
-    # def grid(self):
-    #     for x in range(0, TILESIZE*5, TILESIZE):
-    #         pygame.draw.line(self.screen, WHITE, (x, 0), (x, TILESIZE*5))
-    #     for y in range(0, TILESIZE*5, TILESIZE):
-    #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
-
 #world 1 is world with no packagr, world 2 is with package
     def draw(self, world1, world2, agent, resetNumber):
         self.screen.fill(BLACK)
+        #finding values needs to create the gradient
         w1Maxq = self.findMax(world1)
         w1MinQGreatherThanZero =self.findMinGreaterThanZero(world1)
         w1Minq = self.findMin(world1)
         w1MaxqLessThanZero = self.findMaxLessThanZero(world1)
-
-
 
         w2Maxq = self.findMax(world2)
         w2MinQGreatherThanZero = self.findMinGreaterThanZero(world2)
         w2Minq = self.findMin(world2)
         w2MaxqLessThanZero = self.findMaxLessThanZero(world2)
 
+        #draw all nodes on both map on a screen
         for x in range(11):
             if x != 5:
                 for y in range(5):
@@ -49,13 +44,15 @@ class Visual:
                         self.drawNode(x, y, world1.map[x][y], w1Maxq, w1MinQGreatherThanZero,  w1Minq, w1MaxqLessThanZero)
                     else:
                         self.drawNode(x, y, world2.map[x-6][y], w2Maxq, w2MinQGreatherThanZero, w2Minq, w2MaxqLessThanZero)
+
+        #highlight pickup, dropoff, agent location, and some information about the state space
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
         self.highlightPickupDropoff()
         self.addText(agent, resetNumber)
         pygame.display.flip()
 
-# Adds text to label grids, and show counter/reward
+# Adds text to label grids, and show counter/reward, number of reset
     def addText(self, agent, resetNumber):
         font = pygame.font.SysFont('Arial', 30)
         info = "Agent without package"
@@ -98,6 +95,8 @@ class Visual:
             scale = (currq) / (smaxq)
             g = scale*255
         else:
+            #a different equation is used to create bigger difference between
+            #a linear function is chosen for avoiding no distortion in relations to the path that need to avoid
             scale = (currq - maxQSmallerThanZero)/ (sminq - maxQSmallerThanZero)
             r = scale*255
         return (r,g,0)
@@ -210,7 +209,7 @@ class Visual:
                 if (world.map[i][j].qWest) < min:
                     min = world.map[i][j].qWest
         return min
-
+# following 2 function are used to improve the gradient of the color
     def findMinGreaterThanZero(self, world):
         min = self.findMax(world)
         for i in range(5):

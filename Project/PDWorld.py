@@ -12,6 +12,7 @@ class Node:
         self.qSouth = 0
         self.qWest = 0
 
+#a set of function that checks and apply opeorator to the world
     def pickUpAblock(self):
         if(self.isPickUp and self.blockCount > 0):
                 self.blockCount -= 1
@@ -36,7 +37,7 @@ class Node:
 class World:
     # this initialize the map for the class
 
-    #this method creates 2 type of maps, one have the pickup, the other with dropoff
+    #this method the world, with pickup and drop off location set
     def __init__(self):
         cols = 5
         rows = 5
