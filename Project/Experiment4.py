@@ -32,6 +32,12 @@ class E4:
                 updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, noPackageWorld, .3, 1)
             elif (oldAgent2.havePackage):
                 updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, havePackageWorld, .3, 1)
+                
+        if(world.isCompleteDelevery()):
+            noPackageWorld.mapReset()
+            havePackageWorld.mapReset()
+            print("Map Reset")
+            
     show.run_visual(noPackageWorld, havePackageWorld, agent)
     
     for j in range(7800):
@@ -50,7 +56,12 @@ class E4:
             if not (oldAgent2.havePackage):
                 updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, noPackageWorld, .3, 1)
             elif (oldAgent2.havePackage):
+
                 updateMatrix.SARSAUpdate(oldAgent2, oldAgent1, newAgent, havePackageWorld, .3, 1)
+        if(world.isCompleteDelevery()):
+            noPackageWorld.mapReset()
+            havePackageWorld.mapReset()
+            print("Map Reset")
 
         if j == 1799 or j == 3799 or j == 5799:
             show.run_visual(noPackageWorld, havePackageWorld, agent)

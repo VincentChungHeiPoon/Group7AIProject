@@ -40,6 +40,7 @@ class E3:
         if world.isCompleteDelevery():
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            print("map has been reset")
 
         if i == 99:
             show.run_visual(noPackageWorld, havePackageWorld, agent)
@@ -70,6 +71,7 @@ class E3:
         if world.isCompleteDelevery():
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            print("map has been reset")
 
         if j == 1999:
             show.run_visual(noPackageWorld, havePackageWorld, agent)
