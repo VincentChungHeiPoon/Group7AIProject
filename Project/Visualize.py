@@ -31,18 +31,24 @@ class Visual:
     def draw(self, world1, world2, agent, resetNumber):
         self.screen.fill(BLACK)
         w1Maxq = self.findMax(world1)
+        w1MinQGreatherThanZero =self.findMinGreaterThanZero(world1)
         w1Minq = self.findMin(world1)
+        w1MaxqLessThanZero = self.findMaxLessThanZero(world1)
+
+
 
         w2Maxq = self.findMax(world2)
+        w2MinQGreatherThanZero = self.findMinGreaterThanZero(world2)
         w2Minq = self.findMin(world2)
+        w2MaxqLessThanZero = self.findMaxLessThanZero(world2)
 
         for x in range(11):
             if x != 5:
                 for y in range(5):
                     if x < 5:
-                        self.drawNode(x, y, world1.map[x][y], w1Maxq, w1Minq)
+                        self.drawNode(x, y, world1.map[x][y], w1Maxq, w1MinQGreatherThanZero,  w1Minq, w1MaxqLessThanZero)
                     else:
-                        self.drawNode(x, y, world2.map[x-6][y], w2Maxq, w2Minq)
+                        self.drawNode(x, y, world2.map[x-6][y], w2Maxq, w2MinQGreatherThanZero, w2Minq, w2MaxqLessThanZero)
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
         self.highlightPickupDropoff()
@@ -73,7 +79,7 @@ class Visual:
         self.screen.blit(text, (800, 550))
 
 # Function to determine color gradient based on max and min q values
-    def getGradient(self, maxq, minq, currq):
+    def getGradient(self, maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, currq):
         g = 0
         r = 0
         #error prevention features
@@ -89,10 +95,10 @@ class Visual:
         if currq == 0:
             return LIGHTGREY
         elif currq > 0:
-            scale = currq/smaxq
+            scale = (currq) / (smaxq)
             g = scale*255
         else:
-            scale = currq/sminq
+            scale = (currq - maxQSmallerThanZero)/ (sminq - maxQSmallerThanZero)
             r = scale*255
         return (r,g,0)
 
@@ -112,35 +118,35 @@ class Visual:
 
 
 #fill in each squares with 4 triangle, with the q-value
-    def drawNode(self, x, y, node, maxq, minq):
+    def drawNode(self, x, y, node, maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero):
         x *= 100
         y *= 100
         text = pygame.font.SysFont('Arial', 16)
 
 
         #north
-        color = self.getGradient(maxq, minq, node.qNorth)
+        color = self.getGradient(maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, node.qNorth)
         pygame.draw.polygon(self.screen, color, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qNorth, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 10)))
 
         #east
-        color = self.getGradient(maxq, minq, node.qEast)
+        color = self.getGradient(maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, node.qEast)
         pygame.draw.polygon(self.screen, color, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x + TILESIZE, y), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qEast, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + ((3 * TILESIZE) / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
         #south
-        color = self.getGradient(maxq, minq, node.qSouth)
+        color = self.getGradient(maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, node.qSouth)
         pygame.draw.polygon(self.screen, color, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x + TILESIZE, y + TILESIZE), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qSouth, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + (TILESIZE / 2) - (textCanvas.get_rect().width / 2), y + 75 - (textCanvas.get_rect().height / 2)))
 
         #west
-        color = self.getGradient(maxq, minq, node.qWest)
+        color = self.getGradient(maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, node.qWest)
         pygame.draw.polygon(self.screen, color, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))])
         pygame.draw.polygon(self.screen, WHITE, [(x, y), (x, y + TILESIZE), (x + (TILESIZE / 2), y + (TILESIZE / 2))], 3)
         textCanvas = text.render(str(round(node.qWest, 2)), False, WHITE)
@@ -177,7 +183,8 @@ class Visual:
 
 # This function finds the max or min given a world, oldX and oldY. Returns highest or lowest q
     def findMax(self, world):
-        max = 0.0;
+        #pick a random baseline from the list
+        max = world.map[0][0].qNorth
         for i in range(5):
             for j in range(5):
                 if (world.map[i][j].qNorth) > max:
@@ -191,7 +198,7 @@ class Visual:
         return max
 
     def findMin(self, world):
-        min = 0.0;
+        min = world.map[0][0].qNorth
         for i in range(5):
             for j in range(5):
                 if (world.map[i][j].qNorth) < min:
@@ -203,3 +210,31 @@ class Visual:
                 if (world.map[i][j].qWest) < min:
                     min = world.map[i][j].qWest
         return min
+
+    def findMinGreaterThanZero(self, world):
+        min = self.findMax(world)
+        for i in range(5):
+            for j in range(5):
+                if (world.map[i][j].qNorth < min and world.map[i][j].qNorth > 0):
+                    min = world.map[i][j].qNorth
+                if (world.map[i][j].qEast < min and world.map[i][j].qEast > 0):
+                    min = world.map[i][j].qEast
+                if (world.map[i][j].qSouth < min and world.map[i][j].qSouth > 0):
+                    min = world.map[i][j].qSouth
+                if (world.map[i][j].qWest < min and world.map[i][j].qWest > 0):
+                    min = world.map[i][j].qWest
+        return min
+
+    def findMaxLessThanZero(self, world):
+        max = self.findMin(world)
+        for i in range(5):
+            for j in range(5):
+                if (world.map[i][j].qNorth > max and world.map[i][j].qNorth < 0):
+                    max = world.map[i][j].qNorth
+                if (world.map[i][j].qEast > max and world.map[i][j].qEast < 0):
+                    max = world.map[i][j].qEast
+                if (world.map[i][j].qSouth > max and world.map[i][j].qSouth < 0):
+                    max = world.map[i][j].qSouth
+                if (world.map[i][j].qWest > max and world.map[i][j].qWest < 0):
+                    max = world.map[i][j].qWest
+        return max
