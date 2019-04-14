@@ -54,6 +54,7 @@ class E5:
         updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 0.5)
 
         if world.isCompleteDelevery():
+            print("MapReset")
             # pickup/dropoff are reset like normal for the first terminal state
             if terminalCounter == 0:
                 noPackageWorld.mapReset()

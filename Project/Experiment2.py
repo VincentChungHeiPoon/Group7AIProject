@@ -20,8 +20,8 @@ class E2:
     for i in range(200):
         oldAgent = copy.deepcopy(agent)
         if not (agent.havePackage):
-           world = noPackageWorld
-           world.worldUpdate(havePackageWorld, noPackageWorld)
+            world = noPackageWorld
+            world.worldUpdate(havePackageWorld, noPackageWorld)
         else:
             world = havePackageWorld
             world.worldUpdate(noPackageWorld, havePackageWorld)
@@ -32,13 +32,14 @@ class E2:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            print("MapReset")
     #Show progress after PRANDOM
     show.run_visual(noPackageWorld, havePackageWorld, agent)
 
     #Show progress at fixed intervals
     for i in range(7800):
         oldAgent = copy.deepcopy(agent)
-        if not agent.havePackage:
+        if not (agent.havePackage):
             world = noPackageWorld
             world.worldUpdate(havePackageWorld, noPackageWorld)
         else:
@@ -57,6 +58,7 @@ class E2:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            print("MapReset")
             
     #show = Visual()
     show.run_visual(noPackageWorld, havePackageWorld, agent)
