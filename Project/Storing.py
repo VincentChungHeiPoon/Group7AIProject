@@ -36,7 +36,20 @@ class updateMatrix:
         newX = agentCurr.x
         newY = agentCurr.y
 
-        nextBestQ = max(world.map[newX][newY].qNorth, world.map[newX][newY].qEast, world.map[newX][newY].qSouth, world.map[newX][newY].qEast)
+        applicable = []
+
+        if(agentCurr.canMoveNorth()):
+            applicable.append(world.map[newX][newY].qNorth)
+        if (agentCurr.canMoveEast()):
+            applicable.append(world.map[newX][newY].qEast)
+        if (agentCurr.canMoveSouth()):
+            applicable.append(world.map[newX][newY].qSouth)
+        if (agentCurr.canMoveWest()):
+            applicable.append(world.map[newX][newY].qWest)
+
+
+        #nextBestQ = max(world.map[newX][newY].qNorth, world.map[newX][newY].qEast, world.map[newX][newY].qSouth, world.map[newX][newY].qEast)
+        nextBestQ = max(applicable)
 
         movement = updateMatrix.moveDirection(agentOld, agentCurr)
         if(movement == 0):
@@ -53,7 +66,7 @@ class updateMatrix:
             world.map[oldX][oldY].qWest = ((1-alpha)*(world.map[oldX][oldY].qWest)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
         elif (movement == 4):
             #update all direction as 1 state
-            world.map[oldX][oldY].qNorth =((1-alpha)*(world.map[oldX][oldY].qNorth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
+            world.map[oldX][oldY].qNorth = ((1-alpha)*(world.map[oldX][oldY].qNorth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
             world.map[oldX][oldY].qEast = ((1-alpha)*(world.map[oldX][oldY].qEast)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
             world.map[oldX][oldY].qSouth = ((1-alpha)*(world.map[oldX][oldY].qSouth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
             world.map[oldX][oldY].qWest = ((1-alpha)*(world.map[oldX][oldY].qWest)) + ((alpha)*(reward + ((gamma)*nextBestQ)))

@@ -28,7 +28,7 @@ class Visual:
     #         pygame.draw.line(self.screen, WHITE, (0, y), (TILESIZE*5, y))
 
 #world 1 is world with no packagr, world 2 is with package
-    def draw(self, world1, world2, agent):
+    def draw(self, world1, world2, agent, resetNumber):
         self.screen.fill(BLACK)
         w1Maxq = self.findMax(world1)
         w1Minq = self.findMin(world1)
@@ -46,11 +46,11 @@ class Visual:
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
         self.highlightPickupDropoff()
-        self.addText(agent)
+        self.addText(agent, resetNumber)
         pygame.display.flip()
 
 # Adds text to label grids, and show counter/reward
-    def addText(self, agent):
+    def addText(self, agent, resetNumber):
         font = pygame.font.SysFont('Arial', 30)
         info = "Agent without package"
         text = font.render(info, False, WHITE)
@@ -67,6 +67,10 @@ class Visual:
         info4 = "Agent Reward: " + str(agent.score)
         text = font.render(info4, False, WHITE)
         self.screen.blit(text, (400, 550))
+
+        info5 = "Map Reset Counter: " + str(resetNumber)
+        text = font.render(info5, False, WHITE)
+        self.screen.blit(text, (800, 550))
 
 # Function to determine color gradient based on max and min q values
     def getGradient(self, maxq, minq, currq):
@@ -94,14 +98,14 @@ class Visual:
 
 # Keeps window open until we quit by closing window
 # Set self.playing = False to end the game
-    def run_visual(self, world1, world2, agent):
+    def run_visual(self, world1, world2, agent, resetNumber):
         self.running = True
         while self.running:
             pygame.time.delay(1000)
             for self.event in pygame.event.get():
                 if self.event.type == pygame.QUIT:
                     self.running = False
-            self.draw(world1, world2, agent)
+            self.draw(world1, world2, agent, resetNumber)
 
     def quit(self):
         pygame.quit()
