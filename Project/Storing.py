@@ -41,22 +41,22 @@ class updateMatrix:
         movement = updateMatrix.moveDirection(agentOld, agentCurr)
         if(movement == 0):
             #We have moved north
-            world.map[oldX][oldY].qNorth = (1-alpha)*(world.map[oldX][oldY].qNorth) + (alpha)*(reward + (gamma)*nextBestQ)
+            world.map[oldX][oldY].qNorth = ((1-alpha)*(world.map[oldX][oldY].qNorth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
         elif(movement == 1):
             # We have moved east
-            world.map[oldX][oldY].qEast = (1 - alpha) * (world.map[oldX][oldY].qEast) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qEast = ((1-alpha)*(world.map[oldX][oldY].qEast)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
         elif (movement == 2):
             # We have moved east
-            world.map[oldX][oldY].qSouth = (1 - alpha) * (world.map[oldX][oldY].qSouth) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qSouth = ((1-alpha)*(world.map[oldX][oldY].qSouth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
         elif (movement == 3):
             # We have moved east
-            world.map[oldX][oldY].qWest = (1 - alpha) * (world.map[oldX][oldY].qWest) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qWest = ((1-alpha)*(world.map[oldX][oldY].qWest)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
         elif (movement == 4):
             #update all direction as 1 state
-            world.map[oldX][oldY].qNorth = (1 - alpha) * (world.map[oldX][oldY].qNorth) + (alpha) * (reward + (gamma) * nextBestQ)
-            world.map[oldX][oldY].qEast = (1 - alpha) * (world.map[oldX][oldY].qEast) + (alpha) * (reward + (gamma) * nextBestQ)
-            world.map[oldX][oldY].qSouth = (1 - alpha) * (world.map[oldX][oldY].qSouth) + (alpha) * (reward + (gamma) * nextBestQ)
-            world.map[oldX][oldY].qWest = (1 - alpha) * (world.map[oldX][oldY].qWest) + (alpha) * (reward + (gamma) * nextBestQ)
+            world.map[oldX][oldY].qNorth =((1-alpha)*(world.map[oldX][oldY].qNorth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
+            world.map[oldX][oldY].qEast = ((1-alpha)*(world.map[oldX][oldY].qEast)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
+            world.map[oldX][oldY].qSouth = ((1-alpha)*(world.map[oldX][oldY].qSouth)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
+            world.map[oldX][oldY].qWest = ((1-alpha)*(world.map[oldX][oldY].qWest)) + ((alpha)*(reward + ((gamma)*nextBestQ)))
 
     #this method will update the q vlaue 2 moves ago, as 2 moves are needed to SARSA to have all information
     def SARSAUpdate(agent1, agent2, agent3, world, alpha, gamma):
@@ -75,30 +75,22 @@ class updateMatrix:
         reward = agent2.score - agent1.score
         if (move1 == 0):
             # We have moved north
-            world.map[agent1.x][agent1.y].qNorth = (1 - alpha) * (world.map[agent1.x][agent1.y].qNorth) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
+            world.map[agent1.x][agent1.y].qNorth = ((1 - alpha) * (world.map[agent1.x][agent1.y].qNorth)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
         elif (move1 == 1):
             # We have moved east
-            world.map[agent1.x][agent1.y].qEast = (1 - alpha) * (world.map[agent1.x][agent1.y].qEast) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
+            world.map[agent1.x][agent1.y].qEast = ((1 - alpha) * (world.map[agent1.x][agent1.y].qEast)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
         elif (move1 == 2):
             # We have moved south
-            world.map[agent1.x][agent1.y].qSouth = (1 - alpha) * (world.map[agent1.x][agent1.y].qSouth) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
+            world.map[agent1.x][agent1.y].qSouth = ((1 - alpha) * (world.map[agent1.x][agent1.y].qSouth)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
         elif (move1 == 3):
             # We have moved west
-            world.map[agent1.x][agent1.y].qWest = (1 - alpha) * (world.map[agent1.x][agent1.y].qWest) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
+            world.map[agent1.x][agent1.y].qWest = ((1 - alpha) * (world.map[agent1.x][agent1.y].qWest)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
         elif (move1 == 4):
             # update all direction as 1 state
-            world.map[agent1.x][agent1.y].qNorth = (1 - alpha) * (world.map[agent1.x][agent1.y].qNorth) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
-            world.map[agent1.x][agent1.y].qEast = (1 - alpha) * (world.map[agent1.x][agent1.y].qEast) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
-            world.map[agent1.x][agent1.y].qSouth = (1 - alpha) * (world.map[agent1.x][agent1.y].qSouth) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
-            world.map[agent1.x][agent1.y].qWest = (1 - alpha) * (world.map[agent1.x][agent1.y].qWest) + (alpha) * (
-                        reward + (gamma) * state2Q[move2])
+            world.map[agent1.x][agent1.y].qNorth = ((1 - alpha) * (world.map[agent1.x][agent1.y].qNorth)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
+            world.map[agent1.x][agent1.y].qEast = ((1 - alpha) * (world.map[agent1.x][agent1.y].qEast)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
+            world.map[agent1.x][agent1.y].qSouth = ((1 - alpha) * (world.map[agent1.x][agent1.y].qSouth)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
+            world.map[agent1.x][agent1.y].qWest = ((1 - alpha) * (world.map[agent1.x][agent1.y].qWest)) + ((alpha) * (reward + (gamma) * state2Q[move2]))
         #we will put all 4  value of state 2 into
 
 
