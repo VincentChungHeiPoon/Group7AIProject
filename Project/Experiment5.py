@@ -34,6 +34,7 @@ class E5:
         if world.isCompleteDelevery():
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            print("MapReset")
 
 # Show grids for PRANDOM
     #show.run_visual(noPackageWorld, havePackageWorld, agent)
@@ -70,6 +71,7 @@ class E5:
             elif terminalCounter == 2:
                 noPackageWorld.mapReset()
                 havePackageWorld.mapReset()
+                print("MapReset")
 
         if i == 1799:
             show.run_visual(noPackageWorld, havePackageWorld, agent)
