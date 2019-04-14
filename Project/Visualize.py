@@ -10,7 +10,8 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 LIGHTGREY = (100, 100, 100)
-AGENTCOLOR = (20, 180, 200)
+AGENTCOLORNOBLOCK = (20, 180, 200)
+AGENTCOLOWITHBLOCK = (255, 110, 250)
 PICKUP = (38, 78, 142)
 DROPOFF= (241, 66, 244)
 
@@ -122,7 +123,6 @@ class Visual:
         y *= 100
         text = pygame.font.SysFont('Arial', 16)
 
-
         #north
         color = self.getGradient(maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, node.qNorth)
         pygame.draw.polygon(self.screen, color, [(x, y), (x + TILESIZE, y), ( x + (TILESIZE / 2), y + (TILESIZE / 2))])
@@ -151,14 +151,28 @@ class Visual:
         textCanvas = text.render(str(round(node.qWest, 2)), False, WHITE)
         self.screen.blit(textCanvas, (x + (TILESIZE / 4) - (textCanvas.get_rect().width / 2), y + (TILESIZE / 2) - (textCanvas.get_rect().height / 2)))
 
+        if (node.isPickUp or node.isDropOff):
+            pygame.draw.polygon(self.screen, BLACK, [(x, y), (x + 20, y), (x + 20, y + 20), (x, y + 20)])
+            textCanvas = text.render(str(node.blockCount), False, WHITE)
+            self.screen.blit(textCanvas, (x + 10 - (textCanvas.get_rect().width / 4), y + 7 - (textCanvas.get_rect().height / 4)))
+
+
     def drawAgentLocationLeftMap(self, agent):
         xPosition =  int((agent.x * TILESIZE) + (TILESIZE / 2))
         yPosition =  int((agent.y * TILESIZE) + (TILESIZE / 2))
+        if not (agent.havePackage):
+            AGENTCOLOR = AGENTCOLORNOBLOCK
+        else:
+            AGENTCOLOR = AGENTCOLOWITHBLOCK
         pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition , yPosition), 10)
 
     def drawAgentLocationRightMap(self, agent):
         xPosition =  int((agent.x * TILESIZE) + (TILESIZE / 2))
         yPosition =  int((agent.y * TILESIZE) + (TILESIZE / 2))
+        if not (agent.havePackage):
+            AGENTCOLOR = AGENTCOLORNOBLOCK
+        else:
+            AGENTCOLOR = AGENTCOLOWITHBLOCK
         pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition + 6 * TILESIZE, yPosition), 10)
 
     def highlightPickupDropoff(self):

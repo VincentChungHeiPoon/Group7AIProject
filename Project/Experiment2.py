@@ -14,6 +14,8 @@ class E2:
     havePackageWorld = World()
     noPackageWorld = World()
 
+    resetNumber = 0
+
     show = Visual()
     # show.run_visual(noPackageWorld, havePackageWorld, agent)
     # show.quit()
@@ -33,9 +35,10 @@ class E2:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            resetNumber += 1
             print("MapReset")
     #Show progress after PRANDOM
-    show.run_visual(noPackageWorld, havePackageWorld, agent)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
 
     #Show progress at fixed intervals
     for i in range(7800):
@@ -51,14 +54,17 @@ class E2:
         newAgent = copy.deepcopy(agent)
         updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 0.5)
         if i == 1799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
         elif i == 3799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
         elif i == 5799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
+        elif i == 7799:
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            resetNumber += 1
             print("MapReset")
             
     #show = Visual()
