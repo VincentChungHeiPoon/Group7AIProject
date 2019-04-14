@@ -36,7 +36,7 @@ class E5:
             havePackageWorld.mapReset()
 
 # Show grids for PRANDOM
-    show.run_visual(noPackageWorld, havePackageWorld, agent)
+    #show.run_visual(noPackageWorld, havePackageWorld, agent)
 
 # Run 7800 operations of PEXPLOIT
 # When the agent reaches a terminal state the 2nd time, swap pickup/drop off locations
@@ -70,6 +70,16 @@ class E5:
             elif terminalCounter == 2:
                 noPackageWorld.mapReset()
                 havePackageWorld.mapReset()
+
+        if i == 1799:
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            print("terminalCounter: " + str(terminalCounter))
+        elif i == 3799:
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            print("terminalCounter: " + str(terminalCounter))
+        elif i == 5799:
+            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            print("terminalCounter: " + str(terminalCounter))
 
 # Print data
     print("terminalCounter: " + str(terminalCounter))
