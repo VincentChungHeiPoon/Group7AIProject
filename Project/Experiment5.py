@@ -40,8 +40,7 @@ class E5:
 
 # Run 7800 operations of PEXPLOIT
 # When the agent reaches a terminal state the 2nd time, swap pickup/drop off locations
-# terminalCounter intentionally starting at 1, as it represents first attempt
-    terminalCounter = 1
+    terminalCounter = 0
     for i in range(7800):
         if not (agent.havePackage):
             world = noPackageWorld
@@ -55,18 +54,18 @@ class E5:
 
         if world.isCompleteDelevery():
             # pickup/dropoff are reset like normal for the first terminal state
-            if terminalCounter == 1:
+            if terminalCounter == 0:
                 noPackageWorld.mapReset()
                 havePackageWorld.mapReset()
                 terminalCounter += 1
             # pickup/dropoff are swapped on the second terminal state
-            elif terminalCounter == 2:
+            elif terminalCounter == 1:
                 # swap on each map
                 noPackageWorld.invertPickUpDropOff()
                 havePackageWorld.invertPickUpDropOff()
                 terminalCounter += 1
             # continue resetting packages with the swapped positions
-            elif terminalCounter == 3:
+            elif terminalCounter == 2:
                 noPackageWorld.mapReset()
                 havePackageWorld.mapReset()
 
