@@ -36,12 +36,13 @@ class E5:
             havePackageWorld.mapReset()
 
 # Show grids for PRANDOM
-    #show.run_visual(noPackageWorld, havePackageWorld, agent)
+    show.run_visual(noPackageWorld, havePackageWorld, agent)
 
 # Run 7800 operations of PEXPLOIT
 # When the agent reaches a terminal state the 2nd time, swap pickup/drop off locations
     terminalCounter = 0
     for i in range(7800):
+        oldAgent = copy.deepcopy(agent)
         if not (agent.havePackage):
             world = noPackageWorld
             world.worldUpdate(havePackageWorld, noPackageWorld)
