@@ -42,7 +42,7 @@ class E5:
 # When the agent reaches a terminal state the 2nd time, swap pickup/drop off locations
 # terminalCounter intentionally starting at 1, as it represents first attempt
     terminalCounter = 1
-    for i in range(100):
+    for i in range(7800):
         if not (agent.havePackage):
             world = noPackageWorld
             world.worldUpdate(havePackageWorld, noPackageWorld)
