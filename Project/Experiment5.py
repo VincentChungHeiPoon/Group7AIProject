@@ -93,9 +93,9 @@ class E5:
             show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
             print("terminalCounter: " + str(terminalCounter))
 
-
 # Print data
     print("terminalCounter: " + str(terminalCounter))
 
 # Show grids for PEXPOLIT
     show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
+    show.quit()
