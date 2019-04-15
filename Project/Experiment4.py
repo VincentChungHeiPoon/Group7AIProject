@@ -15,7 +15,9 @@ class E4:
     havePackageWorld = World()
     noPackageWorld = World()
     show = Visual()
-    
+
+    resetNumber = 0
+
     for i in range(200):
         oldAgent2 = copy.deepcopy(oldAgent1)
         oldAgent1 = copy.deepcopy(agent)
@@ -37,9 +39,10 @@ class E4:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            resetNumber += 1
             print("Map Reset")
             
-    show.run_visual(noPackageWorld, havePackageWorld, agent)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
     
     for j in range(7800):
         oldAgent2 = copy.deepcopy(oldAgent1)
@@ -62,10 +65,11 @@ class E4:
         if(world.isCompleteDelevery()):
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            resetNumber += 1
             print("Map Reset")
 
         if j == 1799 or j == 3799 or j == 5799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
 
-    show.run_visual(noPackageWorld, havePackageWorld, agent)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
     show.quit()

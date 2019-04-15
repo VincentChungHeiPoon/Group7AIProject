@@ -20,6 +20,7 @@ class E5:
 # Used to visualize grids
     show = Visual()
 
+    resetNumber = 0
 # Run 200 operations with PRANDOM with a = 0.3, g = 0.5
     for i in range(200):
         oldAgent = copy.deepcopy(agent)
@@ -35,6 +36,7 @@ class E5:
         if world.isCompleteDelevery():
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
+            resetNumber += 1
             print("MapReset")
 
 # Show grids for PRANDOM
@@ -57,6 +59,7 @@ class E5:
 
         if world.isCompleteDelevery():
             print("MapReset")
+            resetNumber += 1
             # pickup/dropoff are reset like normal for the first terminal state
             if terminalCounter == 0:
                 noPackageWorld.mapReset()
@@ -74,18 +77,13 @@ class E5:
                 havePackageWorld.mapReset()
                 print("MapReset")
 
-        if i == 1799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
+        if (i == 1799 or i == 3799 or i == 5799):
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
             print("terminalCounter: " + str(terminalCounter))
-        elif i == 3799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
-            print("terminalCounter: " + str(terminalCounter))
-        elif i == 5799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent)
-            print("terminalCounter: " + str(terminalCounter))
+
 
 # Print data
     print("terminalCounter: " + str(terminalCounter))
 
 # Show grids for PEXPOLIT
-    show.run_visual(noPackageWorld, havePackageWorld, agent)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
