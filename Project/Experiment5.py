@@ -40,7 +40,7 @@ class E5:
             print("MapReset")
 
 # Show grids for PRANDOM
-    #show.run_visual(noPackageWorld, havePackageWorld, agent)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
 
 # Run 7800 operations of PEXPLOIT
 # When the agent reaches a terminal state the 2nd time, swap pickup/drop off locations
