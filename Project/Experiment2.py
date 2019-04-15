@@ -59,14 +59,9 @@ class E2:
         SelectMove.PEPLOIT(agent, world, False)
         newAgent = copy.deepcopy(agent)
         updateMatrix.QUpdate(oldAgent, newAgent, world, 0.3, 0.5)
-        if i == 1799:
+        if (i == 1799 or i == 3799 or i == 5799 or i == 7799):
             show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
-        elif i == 3799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
-        elif i == 5799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
-        elif i == 7799:
-            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
+
         if world.isCompleteDelevery():
             noPackageWorld.mapReset()
             havePackageWorld.mapReset()
