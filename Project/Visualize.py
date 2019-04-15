@@ -20,11 +20,11 @@ TILESIZE = 100
 class Visual:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((1100, 600))
-        pygame.display.set_caption("Visualization")
+        self.screen = pygame.display.set_mode((1100, 650))
+        pygame.display.set_caption("Running of Group 7 Computer")
 
 #world 1 is world with no packagr, world 2 is with package
-    def draw(self, world1, world2, agent, resetNumber):
+    def draw(self, world1, world2, agent, resetNumber, terminationSteps):
         self.screen.fill(BLACK)
         #finding values needs to create the gradient
         w1Maxq = self.findMax(world1)
@@ -67,11 +67,11 @@ class Visual:
         #highlight pickup, dropoff, agent location, and some information about the state space
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
-        self.addText(agent, resetNumber)
+        self.addText(agent, resetNumber, terminationSteps)
         pygame.display.flip()
 
 # Adds text to label grids, and show counter/reward, number of reset
-    def addText(self, agent, resetNumber):
+    def addText(self, agent, resetNumber, terminationSteps):
         font = pygame.font.SysFont('Arial', 30)
         info = "Agent without package"
         text = font.render(info, False, WHITE)
@@ -92,6 +92,12 @@ class Visual:
         info5 = "Map Reset Counter: " + str(resetNumber)
         text = font.render(info5, False, WHITE)
         self.screen.blit(text, (800, 550))
+
+        if len(terminationSteps) >= 10:
+            font = pygame.font.SysFont('Arial', 25)
+        info3 = "Steps taken to reach terminal state: " + ', '.join(map(str, terminationSteps))
+        text = font.render(info3, False, WHITE)
+        self.screen.blit(text, (0, 600))
 
 # Function to determine color gradient based on max and min q values
     def getGradient(self, maxq, minQGreaterThanZero,  minq, maxQSmallerThanZero, currq):
@@ -121,14 +127,14 @@ class Visual:
 
 # Keeps window open until we quit by closing window
 # Set self.playing = False to end the game
-    def run_visual(self, world1, world2, agent, resetNumber):
+    def run_visual(self, world1, world2, agent, resetNumber, terminationSteps):
         self.running = True
         while self.running:
             pygame.time.delay(1000)
             for self.event in pygame.event.get():
                 if self.event.type == pygame.QUIT:
                     self.running = False
-            self.draw(world1, world2, agent, resetNumber)
+            self.draw(world1, world2, agent, resetNumber, terminationSteps)
 
     def quit(self):
         pygame.quit()
