@@ -45,11 +45,28 @@ class Visual:
                         self.drawNode(x, y, world1.map[x][y], w1Maxq, w1MinQGreatherThanZero,  w1Minq, w1MaxqLessThanZero)
                     else:
                         self.drawNode(x, y, world2.map[x-6][y], w2Maxq, w2MinQGreatherThanZero, w2Minq, w2MaxqLessThanZero)
+                        
+        # Draw pickup/dropoff dynamically
+        for x in range(11):
+            if x != 5:
+                for y in range(5):
+                    Ax = x * 100
+                    Ay = y * 100
+                    if x<5:
+                        if (world1.map[x][y].isPickUp):
+                            pygame.draw.rect(self.screen, PICKUP, [Ax, Ay, 100, 100], 5)
+                        if (world1.map[x][y].isDropOff):
+                            pygame.draw.rect(self.screen, DROPOFF, [Ax, Ay, 100, 100], 5)
+                    else:
+                        if (world2.map[x-6][y].isPickUp):
+                            pygame.draw.rect(self.screen, PICKUP, [Ax, Ay, 100, 100], 5)
+                        if (world2.map[x-6][y].isDropOff):
+                            pygame.draw.rect(self.screen, DROPOFF, [Ax, Ay, 100, 100], 5)
+
 
         #highlight pickup, dropoff, agent location, and some information about the state space
         self.drawAgentLocationLeftMap(agent)
         self.drawAgentLocationRightMap(agent)
-        self.highlightPickupDropoff()
         self.addText(agent, resetNumber)
         pygame.display.flip()
 
@@ -175,24 +192,6 @@ class Visual:
             AGENTCOLOR = AGENTCOLOWITHBLOCK
         pygame.draw.circle(self.screen, AGENTCOLOR, (xPosition + 6 * TILESIZE, yPosition), 10)
 
-    def highlightPickupDropoff(self):
-        # Left side of the screen
-        pygame.draw.rect(self.screen, PICKUP, [0, 0, 100, 100], 5)
-        pygame.draw.rect(self.screen, PICKUP, [200, 200, 100, 100], 5)
-        pygame.draw.rect(self.screen, PICKUP, [400, 400, 100, 100], 5)
-
-        pygame.draw.rect(self.screen, DROPOFF, [400, 100, 100, 100], 5)
-        pygame.draw.rect(self.screen, DROPOFF, [0, 400, 100, 100], 5)
-        pygame.draw.rect(self.screen, DROPOFF, [200, 400, 100, 100], 5)
-
-        # Right side of the screen
-        pygame.draw.rect(self.screen, PICKUP, [600, 0, 100, 100], 5)
-        pygame.draw.rect(self.screen, PICKUP, [800, 200, 100, 100], 5)
-        pygame.draw.rect(self.screen, PICKUP, [1000, 400, 100, 100], 5)
-
-        pygame.draw.rect(self.screen, DROPOFF, [1000, 100, 100, 100], 5)
-        pygame.draw.rect(self.screen, DROPOFF, [600, 400, 100, 100], 5)
-        pygame.draw.rect(self.screen, DROPOFF, [800, 400, 100, 100], 5)
 
 # This function finds the max or min given a world, oldX and oldY. Returns highest or lowest q
     def findMax(self, world):
