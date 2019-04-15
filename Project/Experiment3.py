@@ -84,7 +84,7 @@ class E3:
             terminationList.append(terminationSteps)
             previousTermination = agent.steps
 
-        if j == 1799 or j == 3799 or j == 6799:
+        if j == 1799 or j == 3799 or j == 5799 or j == 7799:
             show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
 
     show.quit()
