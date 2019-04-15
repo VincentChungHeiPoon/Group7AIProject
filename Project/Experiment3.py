@@ -18,6 +18,10 @@ class E3:
     noPackageWorld = World()
 
     resetNumber = 0
+    previousTermination = 0
+    terminationSteps = 0
+    terminationList = []
+
     # Run 200 steps with policy PRANDOM,
     for i in range(200):
         oldAgent2 = copy.deepcopy(oldAgent1)
@@ -44,9 +48,11 @@ class E3:
             havePackageWorld.mapReset()
             resetNumber += 1
             print("map has been reset")
+            terminationSteps = agent.steps - previousTermination
+            terminationList.append(terminationSteps)
+            previousTermination = agent.steps
 
-        if i == 199:
-            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
 
     # Run 7800 steps with policy PEXPLOIT
     for j in range(7800):
@@ -74,6 +80,11 @@ class E3:
             havePackageWorld.mapReset()
             resetNumber += 1
             print("map has been reset")
+            terminationSteps = agent.steps - previousTermination
+            terminationList.append(terminationSteps)
+            previousTermination = agent.steps
 
-        if (j == 1799 or j == 3799 or j == 6799):
-            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
+        if j == 1799 or j == 3799 or j == 6799:
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
+
+    show.quit()

@@ -20,7 +20,13 @@ class E5:
 # Used to visualize grids
     show = Visual()
 
+# Parameters for Visualize
     resetNumber = 0
+    previousTermination = 0
+    terminationSteps = 0
+    terminationList = []
+
+
 # Run 200 operations with PRANDOM with a = 0.3, g = 0.5
     for i in range(200):
         oldAgent = copy.deepcopy(agent)
@@ -38,9 +44,12 @@ class E5:
             havePackageWorld.mapReset()
             resetNumber += 1
             print("MapReset")
+            terminationSteps = agent.steps - previousTermination
+            terminationList.append(terminationSteps)
+            previousTermination = agent.steps
 
 # Show grids for PRANDOM
-    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
 
 # Run 7800 operations of PEXPLOIT
 # When the agent reaches a terminal state the 2nd time, swap pickup/drop off locations
@@ -59,6 +68,9 @@ class E5:
 
         if world.isCompleteDelevery():
             print("MapReset")
+            terminationSteps = agent.steps - previousTermination
+            terminationList.append(terminationSteps)
+            previousTermination = agent.steps
             resetNumber += 1
             # pickup/dropoff are reset like normal for the first terminal state
             if terminalCounter == 0:
@@ -78,7 +90,7 @@ class E5:
                 print("MapReset")
 
         if (i == 1799 or i == 3799 or i == 5799):
-            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
+            show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
             print("terminalCounter: " + str(terminalCounter))
 
 
@@ -86,4 +98,4 @@ class E5:
     print("terminalCounter: " + str(terminalCounter))
 
 # Show grids for PEXPOLIT
-    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber)
+    show.run_visual(noPackageWorld, havePackageWorld, agent, resetNumber, terminationList)
