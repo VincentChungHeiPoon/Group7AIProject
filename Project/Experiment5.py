@@ -11,7 +11,7 @@ import random
 
 class E5:
 # Create agent in starting location with no package
-    agent = Agent(4, 0, False)
+    agent = Agent(0, 4, False)
 
 # Create two worlds for when agent has/has no package
     havePackageWorld = World()
