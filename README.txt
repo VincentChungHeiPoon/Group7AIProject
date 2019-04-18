@@ -1,4 +1,1 @@
-Hey, Vincent is here
-Trying git add a single file
-Andy is here
-Melee is the best Smash Bros
+Inorder to execute all 5 experiemnts, there is 5 experiment file experiemnt.1....experiemnt5.py right click and run each
